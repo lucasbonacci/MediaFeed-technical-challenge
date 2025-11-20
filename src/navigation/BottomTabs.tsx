@@ -1,7 +1,7 @@
 import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Routes } from './paths';
-import Feed from '@/screens/Feed';
+import FeedScreen from '@/screens/feedscreen/FeedScreen';
 import Favorites from '@/screens/Favorites';
 import { ListIcon, StarIcon } from '@/assets/svg';
 
@@ -16,7 +16,7 @@ const BottomTabs: React.FC = () => {
       }}>
       <Tab.Screen
         name={Routes.Feed}
-        component={Feed}
+        component={FeedScreen}
         options={{
           tabBarIcon: ({ color, size }) => (
             <ListIcon width={size} height={size} color={color} />
