@@ -1,6 +1,7 @@
 export enum Routes {
-  Feed = 'Feed',
-  Favorites = 'Favorites',
-  NewDetail = 'NewDetail',
+  FeedScreen = 'Feed',
+  FavoritesScreen = 'Favorites',
+  NewDetailScreen = 'NewDetail',
+  Main = 'Main'
 }
 

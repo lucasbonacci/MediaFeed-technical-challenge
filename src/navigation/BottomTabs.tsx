@@ -1,9 +1,8 @@
 import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { Routes } from './paths';
-import FeedScreen from '@/screens/feedScreen/FeedScreen';
-import Favorites from '@/screens/favoritesScreen/FavoritesScreen';
+import {FavoritesScreen,FeedScreen} from '@/screens/index'
 import { ListIcon, StarIcon } from '@/assets/svg';
+import { Routes } from './paths';
 
 const Tab = createBottomTabNavigator();
 
@@ -15,7 +14,7 @@ const BottomTabs: React.FC = () => {
         tabBarInactiveTintColor: '#808080',
       }}>
       <Tab.Screen
-        name={Routes.Feed}
+        name={Routes.FeedScreen}
         component={FeedScreen}
         options={{
           tabBarIcon: ({ color, size }) => (
@@ -24,8 +23,8 @@ const BottomTabs: React.FC = () => {
         }}
       />
       <Tab.Screen
-        name={Routes.Favorites}
-        component={Favorites}
+        name={Routes.FavoritesScreen}
+        component={FavoritesScreen}
         options={{
           tabBarIcon: ({ color, size }) => (
             <StarIcon

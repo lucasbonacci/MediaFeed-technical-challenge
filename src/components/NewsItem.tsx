@@ -7,16 +7,23 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import { NewsArticle } from '@/types/news';
+import { NavigationService } from '@/navigation/NavigationService';
+import { Routes } from '@/navigation/paths';
 
 interface NewsItemProps {
   article: NewsArticle;
 }
 
 const NewsItem: React.FC<NewsItemProps> = memo(({ article }) => {
+  const handlePress = () => {
+    NavigationService.navigate(Routes.NewDetailScreen, { article });
+  };
+
   return (
     <TouchableOpacity
       style={styles.container}
-      activeOpacity={0.7}>
+      activeOpacity={0.5}
+      onPress={handlePress}>
       {article.urlToImage ? (
         <Image
           source={{ uri: article.urlToImage }}
