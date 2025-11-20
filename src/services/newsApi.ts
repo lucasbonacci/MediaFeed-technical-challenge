@@ -7,10 +7,13 @@ import {
 
 export const fetchNews = async ({
   pageParam = 1,
+  searchQuery = 'the',
 }: {
   pageParam?: number;
+  searchQuery?: string;
 }): Promise<NewsApiResponse> => {
-  const url = `${NEWS_API_BASE_URL}/everything?q=the&sortBy=popularity&pageSize=${DEFAULT_PAGE_SIZE}&page=${pageParam}`;
+  const query = searchQuery.trim() || 'the';
+  const url = `${NEWS_API_BASE_URL}/everything?q=${encodeURIComponent(query)}&sortBy=popularity&pageSize=${DEFAULT_PAGE_SIZE}&page=${pageParam}`;
 
   const res = await fetch(url, {
     headers: {

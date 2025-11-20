@@ -1,12 +1,15 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useState } from 'react';
 import { View, FlatList, RefreshControl, StyleSheet } from 'react-native';
 import { useInfiniteQuery } from '@tanstack/react-query';
 import NewsItem from '@/components/NewsItem';
 import { fetchNews } from '@/services/newsApi';
 import { NewsApiResponse, NewsArticle } from '@/types/news';
-import { Loading, ErrorState } from './components';
+import useDebounce from '@/hooks/useDebounce';
+import { Loading, ErrorState, SearchInput,EmptyList } from './components';
 
 export const FeedScreen: React.FC = () => {
+  const [searchValue, setSearchValue] = useState('');
+  const debouncedSearchValue = useDebounce(searchValue, 500);
   const {
     data,
     isLoading,
@@ -18,8 +21,9 @@ export const FeedScreen: React.FC = () => {
     refetch,
     isRefetching,
   } = useInfiniteQuery<NewsApiResponse, Error>({
-    queryKey: ['news'],
-    queryFn: fetchNews,
+    queryKey: ['news', debouncedSearchValue],
+    initialPageParam: 1,
+    queryFn: ({ pageParam }) => fetchNews({ pageParam:(pageParam as number) ?? 1, searchQuery: debouncedSearchValue }),
     getNextPageParam: (lastPage, allPages) => {
       const loadedArticles = allPages.reduce(
         (acc, page) => acc + page.articles.length,
@@ -67,6 +71,7 @@ export const FeedScreen: React.FC = () => {
 
   return (
     <View style={styles.container}>
+      <SearchInput value={searchValue} onChangeText={setSearchValue} />
       <FlatList
         data={flatData}
         keyExtractor={keyExtractor}
@@ -74,6 +79,9 @@ export const FeedScreen: React.FC = () => {
         onEndReached={handleLoadMore}
         onEndReachedThreshold={0.4}
         ListFooterComponent={renderFooter}
+        ListEmptyComponent={
+          <EmptyList isSearch={debouncedSearchValue !== ''} />
+        }
         refreshControl={
           <RefreshControl refreshing={isRefetching} onRefresh={refetch} />
         }
@@ -89,6 +97,7 @@ export const FeedScreen: React.FC = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor:'#fff'
   },
 });
 
