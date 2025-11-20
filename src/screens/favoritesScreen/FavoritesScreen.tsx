@@ -1,11 +1,11 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
-import { Routes } from '../navigation/paths';
+import { Routes } from '../../navigation/paths';
 
-const NewDetail: React.FC = () => {
+const Favorites: React.FC = () => {
   return (
     <View style={styles.container}>
-      <Text style={styles.text}>{Routes.NewDetail}</Text>
+      <Text style={styles.text}>{Routes.Favorites}</Text>
     </View>
   );
 };
@@ -22,5 +22,5 @@ const styles = StyleSheet.create({
   },
 });
 
-export default NewDetail;
+export default Favorites;
 

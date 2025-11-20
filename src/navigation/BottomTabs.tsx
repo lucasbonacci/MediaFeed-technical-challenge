@@ -1,8 +1,8 @@
 import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Routes } from './paths';
-import FeedScreen from '@/screens/feedscreen/FeedScreen';
-import Favorites from '@/screens/Favorites';
+import FeedScreen from '@/screens/feedScreen/FeedScreen';
+import Favorites from '@/screens/favoritesScreen/FavoritesScreen';
 import { ListIcon, StarIcon } from '@/assets/svg';
 
 const Tab = createBottomTabNavigator();

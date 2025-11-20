@@ -4,7 +4,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { navigationRef } from './NavigationService';
 import { Routes } from './paths';
 import BottomTabs from './BottomTabs';
-import NewDetail from '@/screens/NewDetail';
+import NewDetail from '@/screens/newDetailScreen/NewDetailScreen';
 
 const Stack = createStackNavigator();
 
