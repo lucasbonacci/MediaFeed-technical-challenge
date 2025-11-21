@@ -5,6 +5,8 @@ import {
   Image,
   StyleSheet,
   TouchableOpacity,
+  NativeSyntheticEvent,
+  NativeTouchEvent,
 } from 'react-native';
 import { NewsArticle } from '@/types/news';
 import { NavigationService } from '@/navigation/NavigationService';
@@ -24,7 +26,7 @@ const NewsItem: React.FC<NewsItemProps> = memo(({ article }) => {
     NavigationService.navigate(Routes.NewDetailScreen, { article });
   };
 
-  const handleFavoritePress = (e: any) => {
+  const handleFavoritePress = (e: NativeSyntheticEvent<NativeTouchEvent>) => {
     e.stopPropagation();
     toggleFavorite(article);
   };
