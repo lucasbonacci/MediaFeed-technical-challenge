@@ -15,7 +15,7 @@ import { useFavorites } from '@/context/FavoritesContext';
 import { StarIcon } from '@/assets/svg';
 import VideoPlayer from './components/VideoPlayer';
 import { colors } from '@/theme/colors';
-import { formatDate } from '@/utils/listHelpers';
+import { formatDate, normalizeUrl } from '@/utils/listHelpers';
 
 type Props = StackScreenProps<RootStackParamList, Routes.NewDetailScreen>;
 
@@ -25,11 +25,13 @@ const NewDetailScreen: React.FC = ({ route }: Props) => {
   const favorite = isFavorite(article.url);
 
   const handleOpenUrl = async () => {
-    if (article.url) {
-      const supported = await Linking.canOpenURL(article.url);
-      if (supported) {
-        await Linking.openURL(article.url);
-      }
+    const url = normalizeUrl(article.url);
+    if (!url) return;
+
+    try {
+      await Linking.openURL(url);
+    } catch (error) {
+      console.log('Error opening URL:', error);
     }
   };
 
@@ -68,7 +70,9 @@ const NewDetailScreen: React.FC = ({ route }: Props) => {
         </View>
         <View style={styles.metaContainer}>
           <Text style={styles.source}>{article.source.name}</Text>
-          <Text style={styles.date}>{formatDate.full(article.publishedAt)}</Text>
+          <Text style={styles.date}>
+            {formatDate.full(article.publishedAt)}
+          </Text>
         </View>
         {article.author && (
           <Text style={styles.author}>Por: {article.author}</Text>
