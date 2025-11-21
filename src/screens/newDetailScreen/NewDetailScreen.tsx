@@ -11,11 +11,15 @@ import {
 import { StackScreenProps } from '@react-navigation/stack';
 import { RootStackParamList } from '@/types/navigation';
 import { Routes } from '@/navigation/paths';
+import { useFavorites } from '@/context/FavoritesContext';
+import { StarIcon } from '@/assets/svg';
 
 type Props = StackScreenProps<RootStackParamList, Routes.NewDetailScreen>;
 
 const NewDetailScreen: React.FC = ({ route }: Props) => {
   const { article } = route.params;
+  const { isFavorite, toggleFavorite } = useFavorites();
+  const favorite = isFavorite(article.url);
 
   const handleOpenUrl = async () => {
     if (article.url) {
@@ -24,6 +28,10 @@ const NewDetailScreen: React.FC = ({ route }: Props) => {
         await Linking.openURL(article.url);
       }
     }
+  };
+
+  const handleToggleFavorite = () => {
+    toggleFavorite(article);
   };
 
   const formatDate = (dateString: string) => {
@@ -50,7 +58,22 @@ const NewDetailScreen: React.FC = ({ route }: Props) => {
         />
       )}
       <View style={styles.content}>
-        <Text style={styles.title}>{article.title}</Text>
+        <View style={styles.titleContainer}>
+          <Text style={styles.title}>{article.title}</Text>
+          <TouchableOpacity
+            onPress={handleToggleFavorite}
+            style={styles.favoriteButton}
+            hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
+          >
+            <StarIcon
+              width={28}
+              height={28}
+              isFilled={favorite}
+              filledColor="#FFD700"
+              outlineColor="#999"
+            />
+          </TouchableOpacity>
+        </View>
         <View style={styles.metaContainer}>
           <Text style={styles.source}>{article.source.name}</Text>
           <Text style={styles.date}>{formatDate(article.publishedAt)}</Text>
@@ -95,12 +118,22 @@ const styles = StyleSheet.create({
   content: {
     padding: 16,
   },
+  titleContainer: {
+    flexDirection: 'row',
+    alignItems: 'flex-start',
+    marginBottom: 12,
+  },
   title: {
     fontSize: 24,
     fontWeight: '700',
     color: '#000',
-    marginBottom: 12,
     lineHeight: 32,
+    flex: 1,
+    marginRight: 12,
+  },
+  favoriteButton: {
+    padding: 4,
+    marginTop: 2,
   },
   metaContainer: {
     flexDirection: 'row',
