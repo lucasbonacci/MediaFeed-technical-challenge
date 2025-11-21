@@ -9,6 +9,7 @@ import { StatusBar, useColorScheme } from 'react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { QueryClientProvider } from '@tanstack/react-query';
 import { queryClient } from '@/config/react-query';
+import { FavoritesProvider } from '@/context/FavoritesContext';
 import Application from '@/navigation/Application';
 
 function App() {
@@ -16,10 +17,12 @@ function App() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <SafeAreaProvider>
-        <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
-        <Application />
-      </SafeAreaProvider>
+      <FavoritesProvider>
+        <SafeAreaProvider>
+          <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
+          <Application />
+        </SafeAreaProvider>
+      </FavoritesProvider>
     </QueryClientProvider>
   );
 }

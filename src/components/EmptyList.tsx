@@ -2,16 +2,14 @@ import React from 'react';
 import {View, Text, StyleSheet} from 'react-native';
 
 interface EmptyListProps {
-  isSearch?: boolean;
+  text?: string;
 }
 
-const EmptyList: React.FC<EmptyListProps> = ({isSearch = false}) => {
+const EmptyList: React.FC<EmptyListProps> = ({text = ''}) => {
   return (
     <View style={styles.container}>
       <Text style={styles.message}>
-        {isSearch
-          ? 'No se encontraron resultados para tu búsqueda.'
-          : 'No hay datos disponibles.'}
+        {text}
       </Text>
     </View>
   );

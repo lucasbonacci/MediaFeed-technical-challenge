@@ -1,11 +1,42 @@
-import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
-import { Routes } from '../../navigation/paths';
+import React, { useCallback } from 'react';
+import { View, FlatList, StyleSheet, Text } from 'react-native';
+import { useFavorites } from '@/context/FavoritesContext';
+import { NewsItem, EmptyList } from '@/components';
+import { NewsArticle } from '@/types/news';
 
-const Favorites: React.FC = () => {
+const FavoritesScreen: React.FC = () => {
+  const { favorites } = useFavorites();
+
+  const renderItem = useCallback(
+    ({ item }: { item: NewsArticle }) => <NewsItem article={item} />,
+    [],
+  );
+
+  const keyExtractor = useCallback(
+    (item: NewsArticle, index: number) => `${item.url}-${index}`,
+    [],
+  );
+
   return (
     <View style={styles.container}>
-      <Text style={styles.text}>{Routes.Favorites}</Text>
+      <FlatList
+        data={favorites}
+        keyExtractor={keyExtractor}
+        renderItem={renderItem}
+        ListEmptyComponent={
+          <EmptyList
+            text={` No tienes favoritos aún.\n
+        Toca la estrella en cualquier noticia para agregarla a favoritos.`}
+          />
+        }
+        contentContainerStyle={
+          favorites.length === 0 ? styles.emptyContainer : undefined
+        }
+        initialNumToRender={10}
+        maxToRenderPerBatch={10}
+        windowSize={7}
+        removeClippedSubviews
+      />
     </View>
   );
 };
@@ -13,14 +44,14 @@ const Favorites: React.FC = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: '#fff',
+  },
+  emptyContainer: {
+    flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-  },
-  text: {
-    fontSize: 24,
-    fontWeight: 'bold',
+    padding: 20,
   },
 });
 
-export default Favorites;
-
+export default FavoritesScreen;

@@ -9,14 +9,24 @@ import {
 import { NewsArticle } from '@/types/news';
 import { NavigationService } from '@/navigation/NavigationService';
 import { Routes } from '@/navigation/paths';
+import { useFavorites } from '@/context/FavoritesContext';
+import { StarIcon } from '@/assets/svg';
 
 interface NewsItemProps {
   article: NewsArticle;
 }
 
 const NewsItem: React.FC<NewsItemProps> = memo(({ article }) => {
+  const { isFavorite, toggleFavorite } = useFavorites();
+  const favorite = isFavorite(article.url);
+
   const handlePress = () => {
     NavigationService.navigate(Routes.NewDetailScreen, { article });
+  };
+
+  const handleFavoritePress = (e: any) => {
+    e.stopPropagation();
+    toggleFavorite(article);
   };
 
   return (
@@ -34,9 +44,23 @@ const NewsItem: React.FC<NewsItemProps> = memo(({ article }) => {
         <View style={[styles.image, styles.placeholderImage]} />
       )}
       <View style={styles.content}>
-        <Text style={styles.title} numberOfLines={2}>
-          {article.title}
-        </Text>
+        <View style={styles.titleRow}>
+          <Text style={styles.title} numberOfLines={2}>
+            {article.title}
+          </Text>
+          <TouchableOpacity
+            onPress={handleFavoritePress}
+            style={styles.favoriteButton}
+            hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}>
+            <StarIcon
+              width={20}
+              height={20}
+              isFilled={favorite}
+              filledColor="#FFD700"
+              outlineColor="#999"
+            />
+          </TouchableOpacity>
+        </View>
         <Text style={styles.description} numberOfLines={2}>
           {article.description || 'No description available'}
         </Text>
@@ -80,11 +104,21 @@ const styles = StyleSheet.create({
     marginLeft: 12,
     justifyContent: 'space-between',
   },
+  titleRow: {
+    flexDirection: 'row',
+    alignItems: 'flex-start',
+    marginBottom: 4,
+  },
   title: {
     fontSize: 16,
     fontWeight: '600',
     color: '#000',
-    marginBottom: 4,
+    flex: 1,
+    marginRight: 8,
+  },
+  favoriteButton: {
+    padding: 4,
+    marginTop: -2,
   },
   description: {
     fontSize: 14,

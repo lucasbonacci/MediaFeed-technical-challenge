@@ -25,7 +25,7 @@ const Application: React.FC = () => {
           name={Routes.NewDetailScreen}
           component={NewDetailScreen}
           options={({ route }) => ({
-            title: route.params?.article.title ?? 'News Detail',
+            title: route.params?.article.title ?? Routes.NewDetailScreen,
             headerLeft: () => (
               <TouchableOpacity
                 onPress={() => NavigationService.goBack()}

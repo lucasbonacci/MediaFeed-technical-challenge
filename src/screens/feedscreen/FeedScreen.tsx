@@ -5,7 +5,8 @@ import NewsItem from '@/components/NewsItem';
 import { fetchNews } from '@/services/newsApi';
 import { NewsApiResponse, NewsArticle } from '@/types/news';
 import useDebounce from '@/hooks/useDebounce';
-import { Loading, ErrorState, SearchInput,EmptyList } from './components';
+import { Loading, ErrorState, SearchInput } from './components';
+import { EmptyList } from '@/components';
 
 export const FeedScreen: React.FC = () => {
   const [searchValue, setSearchValue] = useState('');
@@ -23,7 +24,11 @@ export const FeedScreen: React.FC = () => {
   } = useInfiniteQuery<NewsApiResponse, Error>({
     queryKey: ['news', debouncedSearchValue],
     initialPageParam: 1,
-    queryFn: ({ pageParam }) => fetchNews({ pageParam:(pageParam as number) ?? 1, searchQuery: debouncedSearchValue }),
+    queryFn: ({ pageParam }) =>
+      fetchNews({
+        pageParam: (pageParam as number) ?? 1,
+        searchQuery: debouncedSearchValue,
+      }),
     getNextPageParam: (lastPage, allPages) => {
       const loadedArticles = allPages.reduce(
         (acc, page) => acc + page.articles.length,
@@ -80,7 +85,13 @@ export const FeedScreen: React.FC = () => {
         onEndReachedThreshold={0.4}
         ListFooterComponent={renderFooter}
         ListEmptyComponent={
-          <EmptyList isSearch={debouncedSearchValue !== ''} />
+          <EmptyList
+            text={
+              debouncedSearchValue !== ''
+                ? 'No se encontraron resultados para tu búsqueda.'
+                : 'No hay datos disponibles.'
+            }
+          />
         }
         refreshControl={
           <RefreshControl refreshing={isRefetching} onRefresh={refetch} />
@@ -97,7 +108,7 @@ export const FeedScreen: React.FC = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor:'#fff'
+    backgroundColor: '#fff',
   },
 });
 
