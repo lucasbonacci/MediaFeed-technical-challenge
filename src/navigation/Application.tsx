@@ -15,7 +15,9 @@ const Stack = createStackNavigator<RootStackParamList>();
 const Application: React.FC = () => {
   return (
     <NavigationContainer ref={navigationRef}>
-      <Stack.Navigator>
+      <Stack.Navigator
+        screenOptions={{ gestureEnabled: true }}
+      >
         <Stack.Screen
           name={Routes.Main}
           component={BottomTabs}

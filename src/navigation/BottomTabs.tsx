@@ -1,6 +1,6 @@
 import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import {FavoritesScreen,FeedScreen} from '@/screens/index'
+import { FavoritesScreen, FeedScreen } from '@/screens/index';
 import { ListIcon, StarIcon } from '@/assets/svg';
 import { Routes } from './paths';
 import { colors } from '@/theme/colors';
@@ -13,11 +13,13 @@ const BottomTabs: React.FC = () => {
       screenOptions={{
         tabBarActiveTintColor: colors.primary,
         tabBarInactiveTintColor: colors.tabInactive,
-      }}>
+      }}
+    >
       <Tab.Screen
         name={Routes.FeedScreen}
         component={FeedScreen}
         options={{
+          headerTitleAlign: 'center',
           tabBarIcon: ({ color, size }) => (
             <ListIcon width={size} height={size} color={color} />
           ),
@@ -27,6 +29,7 @@ const BottomTabs: React.FC = () => {
         name={Routes.FavoritesScreen}
         component={FavoritesScreen}
         options={{
+          headerTitleAlign: 'center',
           tabBarIcon: ({ color, size }) => (
             <StarIcon
               width={size}
@@ -42,4 +45,3 @@ const BottomTabs: React.FC = () => {
 };
 
 export default BottomTabs;
-
