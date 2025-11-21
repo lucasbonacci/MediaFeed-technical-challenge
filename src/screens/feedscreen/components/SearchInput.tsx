@@ -18,7 +18,7 @@ const SearchInput: React.FC<SearchInputProps> = ({ value, onChangeText }) => {
         style={styles.input}
         onChangeText={onChangeText}
         value={value}
-        placeholder="Buscar Personaje"
+        placeholder="Buscar noticias"
         placeholderTextColor="#647184"
       />
     </View>
