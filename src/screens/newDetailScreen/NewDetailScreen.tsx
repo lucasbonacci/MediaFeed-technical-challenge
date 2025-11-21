@@ -13,6 +13,7 @@ import { RootStackParamList } from '@/types/navigation';
 import { Routes } from '@/navigation/paths';
 import { useFavorites } from '@/context/FavoritesContext';
 import { StarIcon } from '@/assets/svg';
+import VideoPlayer from './components/VideoPlayer';
 
 type Props = StackScreenProps<RootStackParamList, Routes.NewDetailScreen>;
 
@@ -89,6 +90,7 @@ const NewDetailScreen: React.FC = ({ route }: Props) => {
             {article.content.replace(/\[\+\d+ chars\]/g, '')}
           </Text>
         )}
+        <VideoPlayer videoUrl={article.videoUrl} />
         {article.url && (
           <TouchableOpacity
             onPress={handleOpenUrl}

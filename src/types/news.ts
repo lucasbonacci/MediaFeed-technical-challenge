@@ -10,6 +10,7 @@ export interface NewsArticle {
   urlToImage: string | null;
   publishedAt: string;
   content: string | null;
+  videoUrl?: string | null;
 }
 
 export interface NewsApiResponse {
