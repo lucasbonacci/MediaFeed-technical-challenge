@@ -1,3 +1,6 @@
+// Setup oficial react-native-gesture-handler
+import 'react-native-gesture-handler/jestSetup';
+
 // Mock AsyncStorage
 jest.mock('@react-native-async-storage/async-storage', () =>
   require('@react-native-async-storage/async-storage/jest/async-storage-mock'),
@@ -20,6 +23,14 @@ jest.mock('@react-navigation/native', () => ({
   useRoute: () => ({ params: {} }),
 }));
 
+// Mock react-native-gesture-handler
+jest.mock('react-native-gesture-handler', () => {
+  const { View } = require('react-native');
+
+  return {
+    GestureHandlerRootView: View,
+  };
+});
+
 // Global fetch mock
 global.fetch = jest.fn();
-
