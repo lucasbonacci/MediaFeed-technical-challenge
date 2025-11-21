@@ -14,6 +14,7 @@ import { Routes } from '@/navigation/paths';
 import { useFavorites } from '@/context/FavoritesContext';
 import { StarIcon } from '@/assets/svg';
 import { colors } from '@/theme/colors';
+import { formatDate } from '@/utils/listHelpers';
 
 interface NewsItemProps {
   article: NewsArticle;
@@ -70,7 +71,7 @@ const NewsItem: React.FC<NewsItemProps> = memo(({ article }) => {
         <View style={styles.footer}>
           <Text style={styles.source}>{article.source.name}</Text>
           <Text style={styles.date}>
-            {new Date(article.publishedAt).toLocaleDateString()}
+            {formatDate.short(article.publishedAt)}
           </Text>
         </View>
       </View>

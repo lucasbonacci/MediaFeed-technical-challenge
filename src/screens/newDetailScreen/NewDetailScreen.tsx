@@ -15,6 +15,7 @@ import { useFavorites } from '@/context/FavoritesContext';
 import { StarIcon } from '@/assets/svg';
 import VideoPlayer from './components/VideoPlayer';
 import { colors } from '@/theme/colors';
+import { formatDate } from '@/utils/listHelpers';
 
 type Props = StackScreenProps<RootStackParamList, Routes.NewDetailScreen>;
 
@@ -34,17 +35,6 @@ const NewDetailScreen: React.FC = ({ route }: Props) => {
 
   const handleToggleFavorite = () => {
     toggleFavorite(article);
-  };
-
-  const formatDate = (dateString: string) => {
-    const date = new Date(dateString);
-    return date.toLocaleDateString('es-ES', {
-      year: 'numeric',
-      month: 'long',
-      day: 'numeric',
-      hour: '2-digit',
-      minute: '2-digit',
-    });
   };
 
   return (
@@ -78,7 +68,7 @@ const NewDetailScreen: React.FC = ({ route }: Props) => {
         </View>
         <View style={styles.metaContainer}>
           <Text style={styles.source}>{article.source.name}</Text>
-          <Text style={styles.date}>{formatDate(article.publishedAt)}</Text>
+          <Text style={styles.date}>{formatDate.full(article.publishedAt)}</Text>
         </View>
         {article.author && (
           <Text style={styles.author}>Por: {article.author}</Text>
