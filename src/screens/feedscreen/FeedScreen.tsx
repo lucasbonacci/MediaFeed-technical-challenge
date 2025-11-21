@@ -6,6 +6,7 @@ import useNewsFeed from '@/hooks/useNewsFeed';
 import { Loading, ErrorState, SearchInput } from './components';
 import { EmptyList } from '@/components';
 import { colors } from '@/theme/colors';
+import { keyExtractor } from '@/utils/listHelpers';
 
 export const FeedScreen: React.FC = () => {
   const [searchValue, setSearchValue] = useState('');
@@ -34,18 +35,13 @@ export const FeedScreen: React.FC = () => {
     [],
   );
 
-  const keyExtractor = useCallback(
-    (item: NewsArticle, index: number) => `${item.url}-${index}`,
-    [],
-  );
-
   const renderFooter = useCallback(() => {
     if (!isFetchingNextPage) return null;
     return <Loading />;
   }, [isFetchingNextPage]);
 
   const hasNoData = !data || flatData.length === 0;
- 
+
   return (
     <View style={styles.container}>
       <SearchInput value={searchValue} onChangeText={setSearchValue} />

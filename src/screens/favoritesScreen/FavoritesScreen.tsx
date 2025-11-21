@@ -4,17 +4,13 @@ import { useFavorites } from '@/context/FavoritesContext';
 import { NewsItem, EmptyList } from '@/components';
 import { NewsArticle } from '@/types/news';
 import { colors } from '@/theme/colors';
+import { keyExtractor } from '@/utils/listHelpers';
 
 const FavoritesScreen: React.FC = () => {
   const { favorites } = useFavorites();
 
   const renderItem = useCallback(
     ({ item }: { item: NewsArticle }) => <NewsItem article={item} />,
-    [],
-  );
-
-  const keyExtractor = useCallback(
-    (item: NewsArticle, index: number) => `${item.url}-${index}`,
     [],
   );
 
