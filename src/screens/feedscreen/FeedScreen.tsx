@@ -1,16 +1,14 @@
 import React, { useCallback, useState } from 'react';
 import { View, FlatList, RefreshControl, StyleSheet } from 'react-native';
-import { useInfiniteQuery } from '@tanstack/react-query';
 import NewsItem from '@/components/NewsItem';
-import { fetchNews } from '@/services/newsApi';
-import { NewsApiResponse, NewsArticle } from '@/types/news';
-import useDebounce from '@/hooks/useDebounce';
+import { NewsArticle } from '@/types/news';
+import useNewsFeed from '@/hooks/useNewsFeed';
 import { Loading, ErrorState, SearchInput } from './components';
 import { EmptyList } from '@/components';
+import { colors } from '@/theme/colors';
 
 export const FeedScreen: React.FC = () => {
   const [searchValue, setSearchValue] = useState('');
-  const debouncedSearchValue = useDebounce(searchValue, 500);
   const {
     data,
     isLoading,
@@ -21,27 +19,7 @@ export const FeedScreen: React.FC = () => {
     isFetchingNextPage,
     refetch,
     isRefetching,
-  } = useInfiniteQuery<NewsApiResponse, Error>({
-    queryKey: ['news', debouncedSearchValue],
-    initialPageParam: 1,
-    queryFn: ({ pageParam }) =>
-      fetchNews({
-        pageParam: (pageParam as number) ?? 1,
-        searchQuery: debouncedSearchValue,
-      }),
-    getNextPageParam: (lastPage, allPages) => {
-      const loadedArticles = allPages.reduce(
-        (acc, page) => acc + page.articles.length,
-        0,
-      );
-
-      if (loadedArticles >= lastPage.totalResults) {
-        return undefined;
-      }
-
-      return allPages.length + 1;
-    },
-  });
+  } = useNewsFeed(searchValue);
 
   const flatData = data?.pages.flatMap(page => page.articles) ?? [];
 
@@ -66,41 +44,46 @@ export const FeedScreen: React.FC = () => {
     return <Loading />;
   }, [isFetchingNextPage]);
 
-  if (isLoading && !data) {
-    return <Loading />;
-  }
-
-  if (isError && !data) {
-    return <ErrorState message={error?.message} onRetry={refetch} />;
-  }
-
+  const hasNoData = !data || flatData.length === 0;
+ 
   return (
     <View style={styles.container}>
       <SearchInput value={searchValue} onChangeText={setSearchValue} />
-      <FlatList
-        data={flatData}
-        keyExtractor={keyExtractor}
-        renderItem={renderItem}
-        onEndReached={handleLoadMore}
-        onEndReachedThreshold={0.4}
-        ListFooterComponent={renderFooter}
-        ListEmptyComponent={
-          <EmptyList
-            text={
-              debouncedSearchValue !== ''
-                ? 'No se encontraron resultados para tu búsqueda.'
-                : 'No hay datos disponibles.'
-            }
-          />
-        }
-        refreshControl={
-          <RefreshControl refreshing={isRefetching} onRefresh={refetch} />
-        }
-        initialNumToRender={10}
-        maxToRenderPerBatch={10}
-        windowSize={7}
-        removeClippedSubviews
-      />
+
+      {isError && hasNoData ? (
+        <ErrorState message={error?.message} onRetry={refetch} />
+      ) : isLoading && hasNoData ? (
+        <Loading />
+      ) : (
+        <FlatList
+          data={flatData}
+          keyExtractor={keyExtractor}
+          renderItem={renderItem}
+          onEndReached={handleLoadMore}
+          onEndReachedThreshold={0.4}
+          ListFooterComponent={renderFooter}
+          ListEmptyComponent={
+            isLoading && hasNoData ? (
+              <Loading />
+            ) : (
+              <EmptyList
+                text={
+                  searchValue.trim() !== ''
+                    ? 'No se encontraron resultados para tu búsqueda.'
+                    : 'No hay datos disponibles.'
+                }
+              />
+            )
+          }
+          refreshControl={
+            <RefreshControl refreshing={isRefetching} onRefresh={refetch} />
+          }
+          initialNumToRender={10}
+          maxToRenderPerBatch={10}
+          windowSize={7}
+          removeClippedSubviews
+        />
+      )}
     </View>
   );
 };
@@ -108,7 +91,7 @@ export const FeedScreen: React.FC = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: colors.background,
   },
 });
 
