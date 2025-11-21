@@ -1,5 +1,6 @@
 import React from 'react';
 import {View, Text, StyleSheet} from 'react-native';
+import { colors } from '@/theme/colors';
 
 interface EmptyListProps {
   text?: string;
@@ -24,7 +25,7 @@ const styles = StyleSheet.create({
   },
   message: {
     fontSize: 16,
-    color: '#666',
+    color: colors.secondary,
     textAlign: 'center',
   },
 });

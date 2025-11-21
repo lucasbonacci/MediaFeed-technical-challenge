@@ -13,6 +13,7 @@ import { NavigationService } from '@/navigation/NavigationService';
 import { Routes } from '@/navigation/paths';
 import { useFavorites } from '@/context/FavoritesContext';
 import { StarIcon } from '@/assets/svg';
+import { colors } from '@/theme/colors';
 
 interface NewsItemProps {
   article: NewsArticle;
@@ -58,8 +59,8 @@ const NewsItem: React.FC<NewsItemProps> = memo(({ article }) => {
               width={20}
               height={20}
               isFilled={favorite}
-              filledColor="#FFD700"
-              outlineColor="#999"
+              filledColor={colors.favorite}
+              outlineColor={colors.textTertiary}
             />
           </TouchableOpacity>
         </View>
@@ -89,17 +90,17 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     padding: 12,
     borderBottomWidth: 1,
-    borderBottomColor: '#e0e0e0',
-    backgroundColor: '#fff',
+    borderBottomColor: colors.border,
+    backgroundColor: colors.background,
   },
   image: {
     width: 100,
     height: 120,
     borderRadius: 8,
-    backgroundColor: '#f0f0f0',
+    backgroundColor: colors.backgroundSecondary,
   },
   placeholderImage: {
-    backgroundColor: '#e0e0e0',
+    backgroundColor: colors.border,
   },
   content: {
     flex: 1,
@@ -114,7 +115,7 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 16,
     fontWeight: '600',
-    color: '#000',
+    color: colors.primary,
     flex: 1,
     marginRight: 8,
   },
@@ -124,7 +125,7 @@ const styles = StyleSheet.create({
   },
   description: {
     fontSize: 14,
-    color: '#666',
+    color: colors.secondary,
     marginBottom: 8,
     flex: 1,
   },
@@ -135,12 +136,12 @@ const styles = StyleSheet.create({
   },
   source: {
     fontSize: 12,
-    color: '#999',
+    color: colors.textTertiary,
     fontWeight: '500',
   },
   date: {
     fontSize: 12,
-    color: '#999',
+    color: colors.textTertiary,
   },
 });
 

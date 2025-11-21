@@ -1,5 +1,6 @@
 import React from 'react';
 import Svg, { Path } from 'react-native-svg';
+import { colors } from '@/theme/colors';
 
 interface StarIconProps {
   width?: number;
@@ -13,8 +14,8 @@ const StarIcon: React.FC<StarIconProps> = ({
   width = 24,
   height = 24,
   isFilled = false,
-  filledColor = '#FFD700',
-  outlineColor = '#808080',
+  filledColor = colors.favorite,
+  outlineColor = colors.tabInactive,
 }) => {
   return (
     <Svg width={width} height={height} viewBox="0 0 24 24" fill="none">

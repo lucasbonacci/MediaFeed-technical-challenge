@@ -5,6 +5,7 @@ import {
   TouchableOpacity,
   StyleSheet,
 } from 'react-native';
+import { colors } from '@/theme/colors';
 
 type ErrorStateProps = {
   message?: string;
@@ -35,13 +36,13 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
   },
   errorText: {
-    color: '#000',
+    color: colors.primary,
     fontSize: 16,
     marginBottom: 8,
     textAlign: 'center',
   },
   retry: {
-    color: '#4fa3ff',
+    color: colors.link,
     fontSize: 16,
   },
 });

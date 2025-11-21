@@ -14,6 +14,7 @@ import { Routes } from '@/navigation/paths';
 import { useFavorites } from '@/context/FavoritesContext';
 import { StarIcon } from '@/assets/svg';
 import VideoPlayer from './components/VideoPlayer';
+import { colors } from '@/theme/colors';
 
 type Props = StackScreenProps<RootStackParamList, Routes.NewDetailScreen>;
 
@@ -70,8 +71,8 @@ const NewDetailScreen: React.FC = ({ route }: Props) => {
               width={28}
               height={28}
               isFilled={favorite}
-              filledColor="#FFD700"
-              outlineColor="#999"
+              filledColor={colors.favorite}
+              outlineColor={colors.textTertiary}
             />
           </TouchableOpacity>
         </View>
@@ -115,7 +116,7 @@ const styles = StyleSheet.create({
   image: {
     width: '100%',
     height: 250,
-    backgroundColor: '#f0f0f0',
+    backgroundColor: colors.backgroundSecondary,
   },
   content: {
     padding: 16,
@@ -128,7 +129,7 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 24,
     fontWeight: '700',
-    color: '#000',
+    color: colors.primary,
     lineHeight: 32,
     flex: 1,
     marginRight: 12,
@@ -144,46 +145,46 @@ const styles = StyleSheet.create({
     marginBottom: 8,
     paddingBottom: 12,
     borderBottomWidth: 1,
-    borderBottomColor: '#e0e0e0',
+    borderBottomColor: colors.border,
   },
   source: {
     fontSize: 14,
-    color: '#666',
+    color: colors.secondary,
     fontWeight: '600',
     textTransform: 'uppercase',
   },
   date: {
     fontSize: 14,
-    color: '#999',
+    color: colors.textTertiary,
   },
   author: {
     fontSize: 14,
-    color: '#666',
+    color: colors.secondary,
     fontStyle: 'italic',
     marginBottom: 16,
   },
   description: {
     fontSize: 18,
-    color: '#333',
+    color: colors.textDark,
     lineHeight: 26,
     marginBottom: 16,
     fontWeight: '500',
   },
   contentText: {
     fontSize: 16,
-    color: '#444',
+    color: colors.textMedium,
     lineHeight: 24,
     marginBottom: 24,
   },
   urlButton: {
-    backgroundColor: '#000',
+    backgroundColor: colors.primary,
     paddingVertical: 14,
     paddingHorizontal: 24,
     borderRadius: 8,
     alignItems: 'center',
   },
   urlButtonText: {
-    color: '#fff',
+    color: colors.background,
     fontSize: 16,
     fontWeight: '600',
   },

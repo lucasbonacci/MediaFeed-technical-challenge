@@ -1,6 +1,7 @@
 import React from 'react';
 import { TextInput, StyleSheet, View } from 'react-native';
 import { SearchIcon } from '@/assets/svg';
+import { colors } from '@/theme/colors';
 
 interface SearchInputProps {
   value: string;
@@ -11,7 +12,7 @@ const SearchInput: React.FC<SearchInputProps> = ({ value, onChangeText }) => {
   return (
     <View style={styles.container}>
       <View style={styles.iconContainer}>
-        <SearchIcon width={20} height={20} color="#647184" />
+        <SearchIcon width={20} height={20} color={colors.searchIcon} />
       </View>
       <TextInput
         testID="search-input"
@@ -19,7 +20,7 @@ const SearchInput: React.FC<SearchInputProps> = ({ value, onChangeText }) => {
         onChangeText={onChangeText}
         value={value}
         placeholder="Buscar noticias"
-        placeholderTextColor="#647184"
+        placeholderTextColor={colors.searchIcon}
       />
     </View>
   );
@@ -29,10 +30,10 @@ const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
     alignItems: 'center',
-    borderColor: 'lightgray',
+    borderColor: colors.borderLight,
     borderWidth: 1,
     margin: 16,
-    backgroundColor: '#fff',
+    backgroundColor: colors.background,
     borderRadius: 10,
     paddingLeft: 18,
     paddingRight: 18,

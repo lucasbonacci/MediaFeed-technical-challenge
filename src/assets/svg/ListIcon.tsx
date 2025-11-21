@@ -1,5 +1,6 @@
 import React from 'react';
 import Svg, { Path } from 'react-native-svg';
+import { colors } from '@/theme/colors';
 
 interface ListIconProps {
   width?: number;
@@ -10,7 +11,7 @@ interface ListIconProps {
 const ListIcon: React.FC<ListIconProps> = ({
   width = 24,
   height = 24,
-  color = '#000000',
+  color = colors.primary,
 }) => {
   return (
     <Svg width={width} height={height} viewBox="0 0 24 24" fill="none">

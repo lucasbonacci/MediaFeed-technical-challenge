@@ -1,8 +1,9 @@
 import React, { useCallback } from 'react';
-import { View, FlatList, StyleSheet, Text } from 'react-native';
+import { View, FlatList, StyleSheet } from 'react-native';
 import { useFavorites } from '@/context/FavoritesContext';
 import { NewsItem, EmptyList } from '@/components';
 import { NewsArticle } from '@/types/news';
+import { colors } from '@/theme/colors';
 
 const FavoritesScreen: React.FC = () => {
   const { favorites } = useFavorites();
@@ -44,7 +45,7 @@ const FavoritesScreen: React.FC = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: colors.background,
   },
   emptyContainer: {
     flex: 1,
