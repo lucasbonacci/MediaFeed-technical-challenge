@@ -1,5 +1,5 @@
 import React from 'react';
-import { TouchableOpacity } from 'react-native';
+import { TouchableOpacity, StyleSheet } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { NavigationService } from '@/navigation/NavigationService';
@@ -12,12 +12,19 @@ import BottomTabs from './BottomTabs';
 
 const Stack = createStackNavigator<RootStackParamList>();
 
+const renderHeaderBackButton = () => (
+  <TouchableOpacity
+    onPress={NavigationService.goBack}
+    style={styles.padding}
+  >
+    <ArrowBackIcon width={22} height={22} />
+  </TouchableOpacity>
+);
+
 const Application: React.FC = () => {
   return (
     <NavigationContainer ref={navigationRef}>
-      <Stack.Navigator
-        screenOptions={{ gestureEnabled: true }}
-      >
+      <Stack.Navigator screenOptions={{ gestureEnabled: true }}>
         <Stack.Screen
           name={Routes.Main}
           component={BottomTabs}
@@ -28,14 +35,7 @@ const Application: React.FC = () => {
           component={NewDetailScreen}
           options={({ route }) => ({
             title: route.params?.article.title ?? Routes.NewDetailScreen,
-            headerLeft: () => (
-              <TouchableOpacity
-                onPress={() => NavigationService.goBack()}
-                style={{ paddingHorizontal: 12 }}
-              >
-                <ArrowBackIcon width={22} height={22} />
-              </TouchableOpacity>
-            ),
+            headerLeft: renderHeaderBackButton,
           })}
         />
       </Stack.Navigator>
@@ -44,3 +44,7 @@ const Application: React.FC = () => {
 };
 
 export default Application;
+
+const styles = StyleSheet.create({
+  padding: { paddingHorizontal: 12 },
+});

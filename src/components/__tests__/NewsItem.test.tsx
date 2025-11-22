@@ -16,8 +16,8 @@ jest.mock('@/navigation/NavigationService', () => ({
 // Mock StarIcon
 jest.mock('@/assets/svg', () => ({
   StarIcon: ({ isFilled }: any) => {
-    const React = require('react');
-    return React.createElement('View', {
+    const ReactModule = require('react');
+    return ReactModule.createElement('View', {
       testID: 'star-icon',
       'data-filled': isFilled,
     });

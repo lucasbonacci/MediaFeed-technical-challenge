@@ -6,7 +6,7 @@
  */
 import 'react-native-gesture-handler';
 import React from 'react';
-import { StatusBar, useColorScheme } from 'react-native';
+import { StatusBar, useColorScheme, StyleSheet } from 'react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { QueryClientProvider } from '@tanstack/react-query';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
@@ -18,7 +18,7 @@ function App() {
   const isDarkMode = useColorScheme() === 'dark';
 
   return (
-    <GestureHandlerRootView style={{ flex: 1 }}>
+    <GestureHandlerRootView style={styles.container}>
       <QueryClientProvider client={queryClient}>
         <FavoritesProvider>
           <SafeAreaProvider>
@@ -35,3 +35,7 @@ function App() {
 
 export default App;
 
+
+const styles = StyleSheet.create({
+  container: { flex: 1 },
+});

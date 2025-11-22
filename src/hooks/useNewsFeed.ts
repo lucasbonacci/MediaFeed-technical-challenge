@@ -1,4 +1,4 @@
-import { NewsApiResponse, NewsArticle } from '@/types/news';
+import { NewsApiResponse } from '@/types/news';
 import useDebounce from '@/hooks/useDebounce';
 import { useInfiniteQuery } from '@tanstack/react-query';
 import { fetchNews } from '@/services/newsApi';

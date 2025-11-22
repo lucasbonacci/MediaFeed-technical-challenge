@@ -7,37 +7,40 @@ import { colors } from '@/theme/colors';
 
 const Tab = createBottomTabNavigator();
 
+const createTabIcon =
+  (IconComponent: React.ComponentType<any>, extraProps = {}) =>
+  ({ color, size }: { color: string; size: number }) =>
+    (
+      <IconComponent
+        width={size}
+        height={size}
+        color={color}
+        outlineColor={color}
+        {...extraProps}
+      />
+    );
+
 const BottomTabs: React.FC = () => {
   return (
     <Tab.Navigator
       screenOptions={{
         tabBarActiveTintColor: colors.primary,
         tabBarInactiveTintColor: colors.tabInactive,
+        headerTitleAlign: 'center',
       }}
     >
       <Tab.Screen
         name={Routes.FeedScreen}
         component={FeedScreen}
         options={{
-          headerTitleAlign: 'center',
-          tabBarIcon: ({ color, size }) => (
-            <ListIcon width={size} height={size} color={color} />
-          ),
+          tabBarIcon: createTabIcon(ListIcon),
         }}
       />
       <Tab.Screen
         name={Routes.FavoritesScreen}
         component={FavoritesScreen}
         options={{
-          headerTitleAlign: 'center',
-          tabBarIcon: ({ color, size }) => (
-            <StarIcon
-              width={size}
-              height={size}
-              isFilled={false}
-              outlineColor={color}
-            />
-          ),
+          tabBarIcon: createTabIcon(StarIcon, { isFilled: false }),
         }}
       />
     </Tab.Navigator>
