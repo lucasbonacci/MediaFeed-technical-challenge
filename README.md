@@ -1,97 +1,140 @@
-This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
+# MediaFeed
 
-# Getting Started
+Aplicación React Native para visualizar y gestionar un feed de noticias con videos.
 
-> **Note**: Make sure you have completed the [Set Up Your Environment](https://reactnative.dev/docs/set-up-your-environment) guide before proceeding.
+## 📋 Requisitos Previos
 
-## Step 1: Start Metro
+Antes de comenzar, asegúrate de tener instalado:
 
-First, you will need to run **Metro**, the JavaScript build tool for React Native.
+- **Node.js**: Versión 22.20.0 (recomendado)
+- **Java**: Versión 17 o superior
+- **Xcode** (para iOS): Última versión estable
+- **Android Studio** (para Android): Última versión estable
 
-To start the Metro dev server, run the following command from the root of your React Native project:
+## 🚀 Cómo Correr el Proyecto
 
-```sh
-# Using npm
+### 1. Instalar Dependencias
+
+```bash
+npm install
+```
+
+### 2. Configuración para iOS
+
+Si vas a correr el proyecto en iOS, necesitas instalar las dependencias de CocoaPods:
+
+```bash
+cd ios
+pod install
+cd ..
+```
+
+### 3. Iniciar Metro Bundler
+
+En una terminal, ejecuta:
+
+```bash
 npm start
-
-# OR using Yarn
-yarn start
 ```
 
-## Step 2: Build and run your app
+### 4. Ejecutar la Aplicación
 
-With Metro running, open a new terminal window/pane from the root of your React Native project, and use one of the following commands to build and run your Android or iOS app:
+#### Android
 
-### Android
+En una nueva terminal:
 
-```sh
-# Using npm
+```bash
 npm run android
-
-# OR using Yarn
-yarn android
 ```
 
-### iOS
+#### iOS
 
-For iOS, remember to install CocoaPods dependencies (this only needs to be run on first clone or after updating native deps).
+En una nueva terminal:
 
-The first time you create a new project, run the Ruby bundler to install CocoaPods itself:
-
-```sh
-bundle install
-```
-
-Then, and every time you update your native dependencies, run:
-
-```sh
-bundle exec pod install
-```
-
-For more information, please visit [CocoaPods Getting Started guide](https://guides.cocoapods.org/using/getting-started.html).
-
-```sh
-# Using npm
+```bash
 npm run ios
-
-# OR using Yarn
-yarn ios
 ```
 
-If everything is set up correctly, you should see your new app running in the Android Emulator, iOS Simulator, or your connected device.
+## 🧪 Testing
 
-This is one way to run your app — you can also build it directly from Android Studio or Xcode.
+Para ejecutar los tests:
 
-## Step 3: Modify your app
+```bash
+npm test
+```
 
-Now that you have successfully run the app, let's make changes!
+## 1. Qué partes del desarrollo resolví con ayuda de IA y cuáles de manera manual
 
-Open `App.tsx` in your text editor of choice and make some changes. When you save, your app will automatically update and reflect these changes — this is powered by [Fast Refresh](https://reactnative.dev/docs/fast-refresh).
+Utilicé herramientas de IA en prácticamente todas las partes del desarrollo: creación de iconos, tests, navegación, screens, hooks, etc. La clave estuvo en describir muy bien en los prompts qué necesitaba y cómo lo necesitaba. Algunas cosas, como la creación de iconos SVG o la generación de tests, la IA las resuelve muy bien. En otros casos, como las vistas, la IA tiende a generar todo en un solo archivo mezclando UI, lógica y datos. Ahí entra la experiencia del programador: modularizar, extraer lógica, separar responsabilidades, eliminar código repetitivo y ajustar estilos para lograr un código más legible, reutilizable y mantenible.
 
-When you want to forcefully reload, for example to reset the state of your app, you can perform a full reload:
+## 2. Prompts que usé y cómo me ayudó la IA en el proceso
 
-- **Android**: Press the <kbd>R</kbd> key twice or select **"Reload"** from the **Dev Menu**, accessed via <kbd>Ctrl</kbd> + <kbd>M</kbd> (Windows/Linux) or <kbd>Cmd ⌘</kbd> + <kbd>M</kbd> (macOS).
-- **iOS**: Press <kbd>R</kbd> in iOS Simulator.
+Algunos ejemplos de los prompts que utilicé:
 
-## Congratulations! :tada:
+- **Instalación de librerías de navegación y generación de archivos base**
 
-You've successfully run and modified your React Native App. :partying_face:
+  Pedí instalar @react-navigation/native, @react-navigation/bottom-tabs, @react-navigation/stack y generar:
 
-### Now what?
+  - Application.tsx: core de la app
+  - BottomTabs.tsx: vistas principales "feed" y "favorites"
+  - NavigationService.ts: con funciones navigate y goBack
+  - paths.ts: enum con rutas de navegación
 
-- If you want to add this new React Native code to an existing application, check out the [Integration guide](https://reactnative.dev/docs/integration-with-existing-apps).
-- If you're curious to learn more about React Native, check out the [docs](https://reactnative.dev/docs/getting-started).
+  Además, le pedí que genere las tres vistas ("feed", "favorites" y "newDetails") sin lógica, solo la estructura.
 
-# Troubleshooting
+- **Generación de iconos SVG**
 
-If you're having issues getting the above steps to work, see the [Troubleshooting](https://reactnative.dev/docs/troubleshooting) page.
+  Le pedí crear tres archivos SVG (flecha, lista y estrella con soporte para outline/solid color). También instalar las librerías necesarias para renderizarlos.
 
-# Learn More
+- **Generación de hooks**
 
-To learn more about React Native, take a look at the following resources:
+  Por ejemplo, un prompt para crear useDebounce dentro de la carpeta /hooks.
 
-- [React Native Website](https://reactnative.dev) - learn more about React Native.
-- [Getting Started](https://reactnative.dev/docs/environment-setup) - an **overview** of React Native and how setup your environment.
-- [Learn the Basics](https://reactnative.dev/docs/getting-started) - a **guided tour** of the React Native **basics**.
-- [Blog](https://reactnative.dev/blog) - read the latest official React Native **Blog** posts.
-- [`@facebook/react-native`](https://github.com/facebook/react-native) - the Open Source; GitHub **repository** for React Native.
+- **Generación de tests**
+
+  Prompt pidiendo un archivo de test para FeedScreen.tsx, cubriendo todos los branches:
+
+  - loading sin datos
+  - error sin datos
+  - datos disponibles
+  - lista vacía
+
+Estos prompts me sirvieron como punto de partida, y después fui adaptando y mejorando el código generado.
+
+## 3. Qué decisiones técnicas tomé y por qué
+
+Decidí utilizar una arquitectura híbrida basada en capas + features, porque permite una separación clara de responsabilidades y facilita que el proyecto escale de manera ordenada. Organicé la app en capas de Presentación, Lógica de Negocio y Datos para mantener el código limpio, reutilizable y fácil de testear.
+
+Elegí React Query para manejar el server state porque el proyecto requiere infinite scroll, manejo de caché, estados de carga y reintentos automáticos. React Query simplifica muchísimo la lógica de fetching y paginación, reduce código repetitivo y brinda una experiencia fluida gracias al cacheo inteligente y al refetch automático.
+
+Para el estado local usé React Context, ya que la feature de favoritos es simple y no justifica librerías más pesadas como Redux o Zustand. React Context es liviano, viene integrado en React y, combinado con un custom hook (useFavorites), permite una manera simple de utilizarlo. Integrándolo con AsyncStorage logré persistencia sin complicaciones.
+
+Extraje la lógica en custom hooks (useNewsFeed, useDebounce, useFavorites) para mantener las pantallas limpias y seguir el patrón Container/Presentational, facilitando reutilización y testeo.
+
+Implementé una capa de servicios para separar el acceso a la API (newsApi.ts) y la persistencia local (favoritesStorage.ts), permitiendo modificar o extender la lógica de datos sin afectar otras capas.
+
+Por último, tomé decisiones de rendimiento, especialmente en las listas: configuraciones optimizadas de FlatList, uso de debounce, memoización y windowing ajustado. Esto mejoró la fluidez del scroll y redujo el consumo de memoria.
+
+## 4. Cómo validé que el código cumple con lo pedido y es de calidad
+
+Para asegurarme de que el código cumpliera con lo solicitado:
+
+- Revisé los requerimientos funcionales de la consigna y validé manualmente todos los flujos principales.
+- Implementé tests con Jest y Testing Library para servicios, hooks y componentes.
+- Usé TypeScript para garantizar consistencia y evitar errores en tiempo de desarrollo.
+- Utilicé ESLint y Prettier para mantener el código ordenado, limpio y estandarizado.
+- Verifiqué la separación de capas y responsabilidades conforme a la arquitectura definida.
+
+## 5. Si usaste código sugerido por IA, qué adaptaciones le hiciste y por qué
+
+En muchos casos la IA generaba código funcional, pero mezclaba UI, lógica y datos en el mismo archivo. Para mantener la arquitectura definida, adapté ese código separándolo en:
+
+- componentes presentacionales
+- lógica encapsulada en hooks
+- acceso a datos en servicios
+
+También eliminé partes repetitivas, mejoré la legibilidad, ajusté estilos, modularicé las vistas y adapté el código para respetar la estructura de carpetas y la arquitectura del proyecto. Esto resultó en un código mucho más mantenible, coherente y escalable.
+
+## ¿Qué desafíos encontraste durante el desarrollo y cómo los resolviste?
+
+Durante el desarrollo no tuve grandes desafíos a nivel lógica o arquitectura, ya que el proyecto es relativamente acotado y pude resolver cada parte de forma fluida. El principal desafío técnico que enfrenté fue que mi entorno de Android estaba desactualizado: tenía una versión vieja de Android Studio y del SDK, y React Native 0.82 exige herramientas más modernas. Para resolverlo, actualicé Android Studio, instalé los SDKs necesarios y ajusté las configuraciones del proyecto para que compile correctamente con la nueva versión. Una vez actualizado el entorno, todo funcionó sin problemas y pude continuar el desarrollo sin bloqueos.
