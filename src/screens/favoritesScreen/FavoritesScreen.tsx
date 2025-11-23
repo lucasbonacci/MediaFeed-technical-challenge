@@ -4,7 +4,7 @@ import { useFavorites } from '@/context/FavoritesContext';
 import { NewsItem, EmptyList } from '@/components';
 import { NewsArticle } from '@/types/news';
 import { colors } from '@/theme/colors';
-import { keyExtractor } from '@/utils/listHelpers';
+import { keyExtractor } from '@/utils';
 
 const FavoritesScreen: React.FC = () => {
   const { favorites } = useFavorites();

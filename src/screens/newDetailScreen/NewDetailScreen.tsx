@@ -15,7 +15,7 @@ import { useFavorites } from '@/context/FavoritesContext';
 import { StarIcon } from '@/assets/svg';
 import VideoPlayer from './components/VideoPlayer';
 import { colors } from '@/theme/colors';
-import { formatDate, normalizeUrl } from '@/utils/listHelpers';
+import { formatDate, normalizeUrl } from '@/utils';
 
 type Props = StackScreenProps<RootStackParamList, Routes.NewDetailScreen>;
 

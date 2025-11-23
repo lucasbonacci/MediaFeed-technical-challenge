@@ -14,75 +14,80 @@ import { Routes } from '@/navigation/paths';
 import { useFavorites } from '@/context/FavoritesContext';
 import { StarIcon } from '@/assets/svg';
 import { colors } from '@/theme/colors';
-import { formatDate } from '@/utils/listHelpers';
+import { formatDate } from '@/utils';
 
 interface NewsItemProps {
   article: NewsArticle;
 }
 
-const NewsItem: React.FC<NewsItemProps> = memo(({ article }) => {
-  const { isFavorite, toggleFavorite } = useFavorites();
-  const favorite = isFavorite(article.url);
+const NewsItem: React.FC<NewsItemProps> = memo(
+  ({ article }) => {
+    const { isFavorite, toggleFavorite } = useFavorites();
+    const favorite = isFavorite(article.url);
 
-  const handlePress = () => {
-    NavigationService.navigate(Routes.NewDetailScreen, { article });
-  };
+    const handlePress = () => {
+      NavigationService.navigate(Routes.NewDetailScreen, { article });
+    };
 
-  const handleFavoritePress = (e: NativeSyntheticEvent<NativeTouchEvent>) => {
-    e.stopPropagation();
-    toggleFavorite(article);
-  };
+    const handleFavoritePress = (e: NativeSyntheticEvent<NativeTouchEvent>) => {
+      e.stopPropagation();
+      toggleFavorite(article);
+    };
 
-  return (
-    <TouchableOpacity
-      style={styles.container}
-      activeOpacity={0.5}
-      onPress={handlePress}>
-      {article.urlToImage ? (
-        <Image
-          source={{ uri: article.urlToImage }}
-          style={styles.image}
-          resizeMode="cover"
-        />
-      ) : (
-        <View style={[styles.image, styles.placeholderImage]} />
-      )}
-      <View style={styles.content}>
-        <View style={styles.titleRow}>
-          <Text style={styles.title} numberOfLines={2}>
-            {article.title}
+    return (
+      <TouchableOpacity
+        style={styles.container}
+        activeOpacity={0.5}
+        onPress={handlePress}
+      >
+        {article.urlToImage ? (
+          <Image
+            source={{ uri: article.urlToImage }}
+            style={styles.image}
+            resizeMode="cover"
+          />
+        ) : (
+          <View style={[styles.image, styles.placeholderImage]} />
+        )}
+        <View style={styles.content}>
+          <View style={styles.titleRow}>
+            <Text style={styles.title} numberOfLines={2}>
+              {article.title}
+            </Text>
+            <TouchableOpacity
+              onPress={handleFavoritePress}
+              style={styles.favoriteButton}
+              hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
+            >
+              <StarIcon
+                width={20}
+                height={20}
+                isFilled={favorite}
+                filledColor={colors.favorite}
+                outlineColor={colors.textTertiary}
+              />
+            </TouchableOpacity>
+          </View>
+          <Text style={styles.description} numberOfLines={2}>
+            {article.description || 'No description available'}
           </Text>
-          <TouchableOpacity
-            onPress={handleFavoritePress}
-            style={styles.favoriteButton}
-            hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}>
-            <StarIcon
-              width={20}
-              height={20}
-              isFilled={favorite}
-              filledColor={colors.favorite}
-              outlineColor={colors.textTertiary}
-            />
-          </TouchableOpacity>
+          <View style={styles.footer}>
+            <Text style={styles.source}>{article.source.name}</Text>
+            <Text style={styles.date}>
+              {formatDate.short(article.publishedAt)}
+            </Text>
+          </View>
         </View>
-        <Text style={styles.description} numberOfLines={2}>
-          {article.description || 'No description available'}
-        </Text>
-        <View style={styles.footer}>
-          <Text style={styles.source}>{article.source.name}</Text>
-          <Text style={styles.date}>
-            {formatDate.short(article.publishedAt)}
-          </Text>
-        </View>
-      </View>
-    </TouchableOpacity>
-  );
-}, (prevProps, nextProps) => {
-  return (
-    prevProps.article.url === nextProps.article.url &&
-    prevProps.article.title === nextProps.article.title
-  );
-});
+      </TouchableOpacity>
+    );
+  },
+  (prevProps, nextProps) => {
+    return (
+      prevProps.article.url === nextProps.article.url &&
+      prevProps.article.title === nextProps.article.title
+    );
+  },
+);
 
 NewsItem.displayName = 'NewsItem';
 
@@ -147,4 +152,3 @@ const styles = StyleSheet.create({
 });
 
 export default NewsItem;
-
