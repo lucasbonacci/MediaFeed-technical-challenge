@@ -39,7 +39,7 @@ export const FeedScreen: React.FC = () => {
     if (isError) return <LoadMoreError message={error?.message} />;
     if (!isFetchingNextPage) return null;
     return <Loading />;
-  }, [isFetchingNextPage, isError]);
+  }, [isFetchingNextPage, isError, error]);
 
   const hasNoData = !data || flatData.length === 0;
 
