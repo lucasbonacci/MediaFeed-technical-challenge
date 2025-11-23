@@ -7,6 +7,7 @@ import useNewsFeed from '@/hooks/useNewsFeed';
 import { FavoritesProvider } from '@/context/FavoritesContext';
 
 jest.mock('@/hooks/useNewsFeed');
+jest.mock('@/context/FavoritesContext');
 
 const mockUseNewsFeed = useNewsFeed as jest.MockedFunction<typeof useNewsFeed>;
 

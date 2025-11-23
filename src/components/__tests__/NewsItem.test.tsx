@@ -16,13 +16,16 @@ jest.mock('@/navigation/NavigationService', () => ({
 // Mock StarIcon
 jest.mock('@/assets/svg', () => ({
   StarIcon: ({ isFilled }: any) => {
-    const ReactModule = require('react');
+    const ReactModule = require('react')
     return ReactModule.createElement('View', {
       testID: 'star-icon',
       'data-filled': isFilled,
     });
   },
 }));
+
+//  Mock del FavoritesContext 
+jest.mock('@/context/FavoritesContext');
 
 const mockNavigate = NavigationService
   .navigate as jest.MockedFunction<typeof NavigationService.navigate>;
