@@ -1,11 +1,6 @@
 import React from 'react';
-import {
-  View,
-  Text,
-  TouchableOpacity,
-  StyleSheet,
-} from 'react-native';
-import { colors } from '@/theme/colors';
+import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
+import { colors, fonts } from '@/theme';
 
 type ErrorStateProps = {
   message?: string;
@@ -15,9 +10,7 @@ type ErrorStateProps = {
 const ErrorState: React.FC<ErrorStateProps> = ({ message, onRetry }) => {
   return (
     <View style={styles.center}>
-      <Text style={styles.errorText}>
-        {message || 'Something went wrong'}
-      </Text>
+      <Text style={styles.errorText}>{message || 'Something went wrong'}</Text>
 
       <TouchableOpacity onPress={onRetry}>
         <Text style={styles.retry}>Tap to retry</Text>
@@ -37,12 +30,12 @@ const styles = StyleSheet.create({
   },
   errorText: {
     color: colors.primary,
-    fontSize: 16,
+    fontSize: fonts.size.medium,
     marginBottom: 8,
     textAlign: 'center',
   },
   retry: {
     color: colors.link,
-    fontSize: 16,
+    fontSize: fonts.size.medium,
   },
 });

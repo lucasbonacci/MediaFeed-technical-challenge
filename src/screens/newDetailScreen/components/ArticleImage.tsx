@@ -1,6 +1,6 @@
 import React from 'react';
 import { Image, StyleSheet } from 'react-native';
-import { colors } from '@/theme/colors';
+import { colors } from '@/theme';
 
 type Props = {
   imageUrl?: string | null;

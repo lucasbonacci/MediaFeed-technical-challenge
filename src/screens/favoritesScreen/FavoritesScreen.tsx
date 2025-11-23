@@ -3,7 +3,7 @@ import { View, FlatList, StyleSheet } from 'react-native';
 import { useFavorites } from '@/context/FavoritesContext';
 import { NewsItem, EmptyList } from '@/components';
 import { NewsArticle } from '@/types/news';
-import { colors } from '@/theme/colors';
+import { colors } from '@/theme';
 import { keyExtractor } from '@/utils';
 
 const FavoritesScreen: React.FC = () => {

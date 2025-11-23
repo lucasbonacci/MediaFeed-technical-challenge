@@ -13,7 +13,7 @@ import { NavigationService } from '@/navigation/NavigationService';
 import { Routes } from '@/navigation/paths';
 import { useFavorites } from '@/context/FavoritesContext';
 import { StarIcon } from '@/assets/svg';
-import { colors } from '@/theme/colors';
+import { colors, fonts } from '@/theme';
 import { formatDate } from '@/utils';
 
 interface NewsItemProps {
@@ -119,8 +119,8 @@ const styles = StyleSheet.create({
     marginBottom: 4,
   },
   title: {
-    fontSize: 16,
-    fontWeight: '600',
+    fontSize: fonts.size.medium,
+    fontWeight: fonts.weight.semibold,
     color: colors.primary,
     flex: 1,
     marginRight: 8,
@@ -130,7 +130,7 @@ const styles = StyleSheet.create({
     marginTop: -2,
   },
   description: {
-    fontSize: 14,
+    fontSize: fonts.size.small,
     color: colors.secondary,
     marginBottom: 8,
     flex: 1,
@@ -141,12 +141,12 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   source: {
-    fontSize: 12,
+    fontSize: fonts.size.xsmall,
     color: colors.textTertiary,
-    fontWeight: '500',
+    fontWeight: fonts.weight.medium,
   },
   date: {
-    fontSize: 12,
+    fontSize: fonts.size.xsmall,
     color: colors.textTertiary,
   },
 });

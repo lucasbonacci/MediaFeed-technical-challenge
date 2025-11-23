@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
-import { colors } from '@/theme/colors';
+import { colors, fonts } from '@/theme';
 import { formatDate } from '@/utils';
 
 type Props = {
@@ -33,19 +33,19 @@ const styles = StyleSheet.create({
     borderBottomColor: colors.border,
   },
   source: {
-    fontSize: 14,
+    fontSize: fonts.size.small,
     color: colors.secondary,
-    fontWeight: '600',
+    fontWeight: fonts.weight.semibold,
     textTransform: 'uppercase',
   },
   date: {
-    fontSize: 14,
+    fontSize: fonts.size.small,
     color: colors.textTertiary,
   },
   author: {
-    fontSize: 14,
+    fontSize: fonts.size.small,
     color: colors.secondary,
-    fontStyle: 'italic',
+    fontStyle: fonts.style.italic,
     marginBottom: 16,
   },
 });

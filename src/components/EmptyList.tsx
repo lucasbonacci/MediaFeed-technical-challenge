@@ -1,17 +1,15 @@
 import React from 'react';
-import {View, Text, StyleSheet} from 'react-native';
-import { colors } from '@/theme/colors';
+import { View, Text, StyleSheet } from 'react-native';
+import { colors, fonts } from '@/theme';
 
 interface EmptyListProps {
   text?: string;
 }
 
-const EmptyList: React.FC<EmptyListProps> = ({text = ''}) => {
+const EmptyList: React.FC<EmptyListProps> = ({ text = '' }) => {
   return (
     <View style={styles.container}>
-      <Text style={styles.message}>
-        {text}
-      </Text>
+      <Text style={styles.message}>{text}</Text>
     </View>
   );
 };
@@ -24,7 +22,7 @@ const styles = StyleSheet.create({
     padding: 20,
   },
   message: {
-    fontSize: 16,
+    fontSize: fonts.size.medium,
     color: colors.secondary,
     textAlign: 'center',
   },

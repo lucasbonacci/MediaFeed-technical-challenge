@@ -1,4 +1,4 @@
-export const colors = {
+const colors = {
   primary: '#000',
   secondary: '#666',
   background: '#fff',
@@ -14,3 +14,4 @@ export const colors = {
   link: '#4fa3ff',
 };
 
+export default colors;

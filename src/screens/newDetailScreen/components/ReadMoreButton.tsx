@@ -1,6 +1,6 @@
 import React from 'react';
 import { TouchableOpacity, Text, StyleSheet } from 'react-native';
-import { colors } from '@/theme/colors';
+import { colors, fonts } from '@/theme';
 
 type Props = {
   onPress: () => void;
@@ -28,8 +28,8 @@ const styles = StyleSheet.create({
   },
   urlButtonText: {
     color: colors.background,
-    fontSize: 16,
-    fontWeight: '600',
+    fontSize: fonts.size.medium,
+    fontWeight: fonts.weight.semibold,
   },
 });
 

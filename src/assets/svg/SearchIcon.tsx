@@ -1,6 +1,6 @@
 import React from 'react';
 import Svg, { Path } from 'react-native-svg';
-import { colors } from '@/theme/colors';
+import { colors } from '@/theme';
 
 interface SearchIconProps {
   width?: number;
@@ -27,4 +27,3 @@ const SearchIcon: React.FC<SearchIconProps> = ({
 };
 
 export default SearchIcon;
-

@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
-import { colors } from '@/theme/colors';
+import { colors, fonts } from '@/theme';
 
 type Props = {
   message?: string;
@@ -27,7 +27,7 @@ const styles = StyleSheet.create({
   },
   text: {
     color: colors.secondary,
-    fontSize: 14,
+    fontSize: fonts.size.small,
     textAlign: 'center',
   },
 });

@@ -5,7 +5,7 @@ import { NewsArticle } from '@/types/news';
 import useNewsFeed from '@/hooks/useNewsFeed';
 import { Loading, ErrorState, SearchInput, LoadMoreError } from './components';
 import { EmptyList } from '@/components';
-import { colors } from '@/theme/colors';
+import { colors } from '@/theme';
 import { keyExtractor } from '@/utils';
 
 export const FeedScreen: React.FC = () => {

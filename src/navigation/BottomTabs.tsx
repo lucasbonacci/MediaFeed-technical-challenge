@@ -3,7 +3,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { FavoritesScreen, FeedScreen } from '@/screens/index';
 import { ListIcon, StarIcon } from '@/assets/svg';
 import { Routes } from './paths';
-import { colors } from '@/theme/colors';
+import { colors } from '@/theme';
 
 const Tab = createBottomTabNavigator();
 

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Text, StyleSheet } from 'react-native';
-import { colors } from '@/theme/colors';
+import { colors, fonts } from '@/theme';
 
 type Props = {
   description?: string | null;
@@ -29,16 +29,16 @@ const ArticleBody: React.FC<Props> = ({ description, content }) => {
 
 const styles = StyleSheet.create({
   description: {
-    fontSize: 18,
+    fontSize: fonts.size.large,
     color: colors.textDark,
-    lineHeight: 26,
+    lineHeight: fonts.lineHeight.large,
     marginBottom: 16,
-    fontWeight: '500',
+    fontWeight: fonts.weight.medium,
   },
   contentText: {
-    fontSize: 16,
+    fontSize: fonts.size.medium,
     color: colors.textMedium,
-    lineHeight: 24,
+    lineHeight: fonts.lineHeight.medium,
     marginBottom: 24,
   },
 });

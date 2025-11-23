@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import { StarIcon } from '@/assets/svg';
-import { colors } from '@/theme/colors';
+import { colors, fonts } from '@/theme';
 
 type Props = {
   title: string;
@@ -42,10 +42,10 @@ const styles = StyleSheet.create({
     marginBottom: 12,
   },
   title: {
-    fontSize: 24,
-    fontWeight: '700',
+    fontSize: fonts.size.xlarge,
+    fontWeight: fonts.weight.bold,
     color: colors.primary,
-    lineHeight: 32,
+    lineHeight: fonts.lineHeight.xlarge,
     flex: 1,
     marginRight: 12,
   },

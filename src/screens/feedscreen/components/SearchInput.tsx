@@ -1,7 +1,7 @@
 import React from 'react';
 import { TextInput, StyleSheet, View } from 'react-native';
 import { SearchIcon } from '@/assets/svg';
-import { colors } from '@/theme/colors';
+import { colors, fonts } from '@/theme';
 
 interface SearchInputProps {
   value: string;
@@ -44,7 +44,7 @@ const styles = StyleSheet.create({
   input: {
     flex: 1,
     paddingVertical: 18,
-    fontSize: 16,
+    fontSize: fonts.size.medium,
   },
 });
 

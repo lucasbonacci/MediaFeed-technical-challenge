@@ -1,8 +1,8 @@
 import React, { useRef } from 'react';
 import { View, StyleSheet } from 'react-native';
 import Video, { VideoRef } from 'react-native-video';
-import { FALLBACK_VIDEO,POSTER_VIDEO } from '@/constants/media';
-import { colors } from '@/theme/colors';
+import { FALLBACK_VIDEO, POSTER_VIDEO } from '@/constants/media';
+import { colors } from '@/theme';
 
 interface Props {
   videoUrl?: string | null;
@@ -24,7 +24,6 @@ const VideoPlayer: React.FC<Props> = ({ videoUrl }) => {
         }}
         paused={true}
         poster={POSTER_VIDEO}
-
       />
     </View>
   );
