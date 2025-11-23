@@ -3,10 +3,10 @@ import { View, FlatList, RefreshControl, StyleSheet } from 'react-native';
 import NewsItem from '@/components/NewsItem';
 import { NewsArticle } from '@/types/news';
 import useNewsFeed from '@/hooks/useNewsFeed';
-import { Loading, ErrorState, SearchInput } from './components';
+import { Loading, ErrorState, SearchInput, LoadMoreError } from './components';
 import { EmptyList } from '@/components';
 import { colors } from '@/theme/colors';
-import { keyExtractor } from '@/utils/listHelpers';
+import { keyExtractor } from '@/utils';
 
 export const FeedScreen: React.FC = () => {
   const [searchValue, setSearchValue] = useState('');
@@ -25,10 +25,10 @@ export const FeedScreen: React.FC = () => {
   const flatData = data?.pages.flatMap(page => page.articles) ?? [];
 
   const handleLoadMore = useCallback(() => {
-    if (!isFetchingNextPage && hasNextPage) {
+    if (!isFetchingNextPage && hasNextPage && !isError) {
       fetchNextPage();
     }
-  }, [fetchNextPage, hasNextPage, isFetchingNextPage]);
+  }, [fetchNextPage, hasNextPage, isFetchingNextPage, isError]);
 
   const renderItem = useCallback(
     ({ item }: { item: NewsArticle }) => <NewsItem article={item} />,
@@ -36,9 +36,10 @@ export const FeedScreen: React.FC = () => {
   );
 
   const renderFooter = useCallback(() => {
+    if (isError) return <LoadMoreError message={error?.message} />;
     if (!isFetchingNextPage) return null;
     return <Loading />;
-  }, [isFetchingNextPage]);
+  }, [isFetchingNextPage, isError]);
 
   const hasNoData = !data || flatData.length === 0;
 
