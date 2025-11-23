@@ -1,4 +1,5 @@
 import { NewsApiResponse } from '@/types/news';
+import { parseNewsApiResponse } from '@/utils';
 import {
   NEWS_API_KEY,
   DEFAULT_PAGE_SIZE,
@@ -13,7 +14,10 @@ export const fetchNews = async ({
   searchQuery?: string;
 }): Promise<NewsApiResponse> => {
   const query = searchQuery.trim() || 'the';
-  const url = `${NEWS_API_BASE_URL}/everything?q=${encodeURIComponent(query)}&sortBy=popularity&pageSize=${DEFAULT_PAGE_SIZE}&page=${pageParam}`;
+
+  const url = `${NEWS_API_BASE_URL}/everything?q=${encodeURIComponent(
+    query,
+  )}&sortBy=popularity&pageSize=${DEFAULT_PAGE_SIZE}&page=${pageParam}`;
 
   const res = await fetch(url, {
     headers: {
@@ -21,13 +25,12 @@ export const fetchNews = async ({
     },
   });
 
-  if (!res.ok) {
-    const errorBody = await res.json().catch(() => null);
+  const body = await res.json().catch(() => null);
 
-    throw new Error(errorBody?.message || 'Error fetching news');
+  if (!res.ok) {
+    const message = (body as any)?.message || 'Error fetching news';
+    throw new Error(message);
   }
 
-  const data: NewsApiResponse = await res.json();
-
-  return data;
+  return parseNewsApiResponse(body);
 };
