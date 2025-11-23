@@ -19,8 +19,21 @@ describe('favoritesStorage service', () => {
     },
   ];
 
+  let warnSpy: jest.SpyInstance;
+  let errorSpy: jest.SpyInstance;
+
+  beforeAll(() => {
+    warnSpy = jest.spyOn(console, 'warn').mockImplementation(() => {});
+    errorSpy = jest.spyOn(console, 'error').mockImplementation(() => {});
+  });
+
   beforeEach(() => {
     jest.clearAllMocks();
+  });
+
+  afterAll(() => {
+    warnSpy.mockRestore();
+    errorSpy.mockRestore();
   });
 
   // getStoredFavorites
