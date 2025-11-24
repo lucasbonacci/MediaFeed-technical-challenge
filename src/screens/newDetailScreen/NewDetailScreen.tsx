@@ -1,10 +1,10 @@
 import React from 'react';
-import { View, StyleSheet, ScrollView, Linking } from 'react-native';
+import { View, StyleSheet, ScrollView } from 'react-native';
 import { StackScreenProps } from '@react-navigation/stack';
 import { RootStackParamList } from '@/types/navigation';
 import { Routes } from '@/navigation/paths';
-import { useFavorites } from '@/context/FavoritesContext';
-import { normalizeUrl } from '@/utils';
+import { useArticleFavorite } from '@/hooks/useArticleFavorite';
+import { openUrl } from '@/utils';
 import {
   ArticleImage,
   ArticleHeader,
@@ -18,23 +18,7 @@ type Props = StackScreenProps<RootStackParamList, Routes.NewDetailScreen>;
 
 const NewDetailScreen: React.FC<Props> = ({ route }) => {
   const { article } = route.params;
-  const { isFavorite, toggleFavorite } = useFavorites();
-  const favorite = isFavorite(article.url);
-
-  const handleOpenUrl = async () => {
-    const url = normalizeUrl(article.url);
-    if (!url) return;
-
-    try {
-      await Linking.openURL(url);
-    } catch (error) {
-      console.log('Error opening URL:', error);
-    }
-  };
-
-  const handleToggleFavorite = () => {
-    toggleFavorite(article);
-  };
+  const { favorite, handleFavoritePress } = useArticleFavorite(article);
 
   return (
     <ScrollView
@@ -47,7 +31,7 @@ const NewDetailScreen: React.FC<Props> = ({ route }) => {
         <ArticleHeader
           title={article.title}
           isFavorite={favorite}
-          onToggleFavorite={handleToggleFavorite}
+          onToggleFavorite={handleFavoritePress}
         />
 
         <ArticleMeta
@@ -63,7 +47,7 @@ const NewDetailScreen: React.FC<Props> = ({ route }) => {
 
         <VideoPlayer videoUrl={article.videoUrl} />
 
-        {article.url && <ReadMoreButton onPress={handleOpenUrl} />}
+        {article.url && <ReadMoreButton onPress={() => openUrl(article.url)} />}
       </View>
     </ScrollView>
   );

@@ -4,14 +4,10 @@ import {
   Text,
   StyleSheet,
   TouchableOpacity,
-  NativeSyntheticEvent,
-  NativeTouchEvent,
 } from 'react-native';
 import FastImage from '@d11/react-native-fast-image';
-import { NavigationService } from '@/navigation/NavigationService';
-import { useFavorites } from '@/context/FavoritesContext';
+import { useArticleFavorite } from '@/hooks/useArticleFavorite';
 import { NewsArticle } from '@/types/news';
-import { Routes } from '@/navigation/paths';
 import { StarIcon } from '@/assets/svg';
 import { colors, fonts } from '@/theme';
 import { formatDate } from '@/utils';
@@ -22,34 +18,25 @@ interface NewsItemProps {
 
 const NewsItem: React.FC<NewsItemProps> = memo(
   ({ article }) => {
-    const { isFavorite, toggleFavorite } = useFavorites();
-    const favorite = isFavorite(article.url);
-
-    const handlePress = () => {
-      NavigationService.navigate(Routes.NewDetailScreen, { article });
-    };
-
-    const handleFavoritePress = (e: NativeSyntheticEvent<NativeTouchEvent>) => {
-      e.stopPropagation();
-      toggleFavorite(article);
-    };
+    const { favorite, handleFavoritePress, handleOpenArticle } =
+      useArticleFavorite(article);
 
     return (
       <TouchableOpacity
         style={styles.container}
         activeOpacity={0.5}
-        onPress={handlePress}
+        onPress={handleOpenArticle}
       >
         {article.urlToImage ? (
-            <FastImage
-              source={{
-                uri: article.urlToImage,
-                priority: FastImage.priority.high,
-                cache: FastImage.cacheControl.immutable,
-              }}
-              style={styles.image}
-              resizeMode={FastImage.resizeMode.cover}
-            />
+          <FastImage
+            source={{
+              uri: article.urlToImage,
+              priority: FastImage.priority.high,
+              cache: FastImage.cacheControl.immutable,
+            }}
+            style={styles.image}
+            resizeMode={FastImage.resizeMode.cover}
+          />
         ) : (
           <View style={[styles.image, styles.placeholderImage]} />
         )}
@@ -59,7 +46,10 @@ const NewsItem: React.FC<NewsItemProps> = memo(
               {article.title}
             </Text>
             <TouchableOpacity
-              onPress={handleFavoritePress}
+              onPress={e => {
+                e.stopPropagation();
+                handleFavoritePress();
+              }}
               style={styles.favoriteButton}
               hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
             >
