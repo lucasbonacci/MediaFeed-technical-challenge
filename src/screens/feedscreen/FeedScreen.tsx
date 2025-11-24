@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useMemo, useState } from 'react';
 import { View, FlatList, RefreshControl, StyleSheet } from 'react-native';
 import NewsItem from '@/components/NewsItem';
 import { NewsArticle } from '@/types/news';
@@ -10,25 +10,23 @@ import { keyExtractor } from '@/utils';
 
 export const FeedScreen: React.FC = () => {
   const [searchValue, setSearchValue] = useState('');
+
   const {
-    data,
     isLoading,
     isError,
-    error,
-    fetchNextPage,
-    hasNextPage,
     isFetchingNextPage,
     refetch,
     isRefetching,
+    flatData,
+    hasNoData,
+    handleLoadMore,
+    errorMessage
   } = useNewsFeed(searchValue);
 
-  const flatData = data?.pages.flatMap(page => page.articles) ?? [];
-
-  const handleLoadMore = useCallback(() => {
-    if (!isFetchingNextPage && hasNextPage && !isError) {
-      fetchNextPage();
-    }
-  }, [fetchNextPage, hasNextPage, isFetchingNextPage, isError]);
+  const isSearching = useMemo(
+    () => searchValue.trim().length > 0,
+    [searchValue],
+  );
 
   const renderItem = useCallback(
     ({ item }: { item: NewsArticle }) => <NewsItem article={item} />,
@@ -36,19 +34,23 @@ export const FeedScreen: React.FC = () => {
   );
 
   const renderFooter = useCallback(() => {
-    if (isError) return <LoadMoreError message={error?.message} />;
+    if (isError) return <LoadMoreError message={errorMessage} />;
     if (!isFetchingNextPage) return null;
     return <Loading />;
-  }, [isFetchingNextPage, isError, error]);
+  }, [isFetchingNextPage, isError, errorMessage]);
 
-  const hasNoData = !data || flatData.length === 0;
+  const emptyListText = isSearching
+    ? 'No se encontraron resultados para tu búsqueda.'
+    : 'No hay datos disponibles.';
+
+  const showList = !isError || !hasNoData;
 
   return (
     <View style={styles.container}>
       <SearchInput value={searchValue} onChangeText={setSearchValue} />
 
-      {isError && hasNoData ? (
-        <ErrorState message={error?.message} onRetry={refetch} />
+      {!showList && isError ? (
+        <ErrorState message={errorMessage} onRetry={refetch} />
       ) : isLoading && hasNoData ? (
         <Loading />
       ) : (
@@ -63,13 +65,7 @@ export const FeedScreen: React.FC = () => {
             isLoading && hasNoData ? (
               <Loading />
             ) : (
-              <EmptyList
-                text={
-                  searchValue.trim() !== ''
-                    ? 'No se encontraron resultados para tu búsqueda.'
-                    : 'No hay datos disponibles.'
-                }
-              />
+              <EmptyList text={emptyListText} />
             )
           }
           refreshControl={

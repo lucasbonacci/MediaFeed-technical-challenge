@@ -36,6 +36,8 @@ describe('FeedScreen - branch coverage', () => {
       isFetchingNextPage: false,
       refetch: jest.fn(),
       isRefetching: false,
+      flatData: [],
+      hasNoData: true,
     } as any);
 
     const { UNSAFE_queryByType } = renderWithProviders(<FeedScreen />);
@@ -55,6 +57,9 @@ describe('FeedScreen - branch coverage', () => {
       isFetchingNextPage: false,
       refetch: jest.fn(),
       isRefetching: false,
+      flatData: [],
+      hasNoData: true,
+      errorMessage: 'Error message',
     } as any);
 
     const { getByText } = renderWithProviders(<FeedScreen />);
@@ -89,6 +94,19 @@ describe('FeedScreen - branch coverage', () => {
       isFetchingNextPage: false,
       refetch: jest.fn(),
       isRefetching: false,
+      flatData: [
+        {
+          source: { id: '1', name: 'Source' },
+          author: 'Author',
+          title: 'Article 1',
+          description: 'desc',
+          url: 'https://example.com',
+          urlToImage: null,
+          publishedAt: '2024-01-01T00:00:00Z',
+          content: 'content',
+        },
+      ],
+      hasNoData: false,
     } as any);
 
     const { getByText, UNSAFE_getByType } = renderWithProviders(<FeedScreen />);
@@ -111,6 +129,8 @@ describe('FeedScreen - branch coverage', () => {
       isFetchingNextPage: false,
       refetch: jest.fn(),
       isRefetching: false,
+      flatData: [],
+      hasNoData: false,
     } as any);
 
     const { getByText, getByTestId } = renderWithProviders(<FeedScreen />);
@@ -142,6 +162,8 @@ describe('FeedScreen - branch coverage', () => {
       isFetchingNextPage: true,
       refetch: jest.fn(),
       isRefetching: false,
+      flatData: [],
+      hasNoData: true,
     } as any);
 
     const { UNSAFE_getAllByType } = renderWithProviders(<FeedScreen />);

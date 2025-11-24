@@ -10,8 +10,7 @@ type ErrorStateProps = {
 const ErrorState: React.FC<ErrorStateProps> = ({ message, onRetry }) => {
   return (
     <View style={styles.center}>
-      <Text style={styles.errorText}>{message || 'Something went wrong'}</Text>
-
+      <Text style={styles.errorText}>{message}</Text>
       <TouchableOpacity onPress={onRetry}>
         <Text style={styles.retry}>Tap to retry</Text>
       </TouchableOpacity>
