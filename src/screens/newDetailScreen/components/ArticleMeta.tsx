@@ -16,8 +16,7 @@ const ArticleMeta: React.FC<Props> = ({ sourceName, publishedAt, author }) => {
         <Text style={styles.source}>{sourceName}</Text>
         <Text style={styles.date}>{formatDate.full(publishedAt)}</Text>
       </View>
-
-      {author ? <Text style={styles.author}>Por: {author}</Text> : null}
+      {author && <Text style={styles.author}>Por: {author}</Text>}
     </>
   );
 };

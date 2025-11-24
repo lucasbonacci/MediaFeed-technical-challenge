@@ -1,6 +1,7 @@
 import React from 'react';
 import { Text, StyleSheet } from 'react-native';
 import { colors, fonts } from '@/theme';
+import { cleanArticleContent } from '@/utils';
 
 type Props = {
   description?: string | null;
@@ -8,21 +9,18 @@ type Props = {
 };
 
 const ArticleBody: React.FC<Props> = ({ description, content }) => {
-  const cleanedContent = content?.replace(/\[\+\d+ chars\]/g, '') ?? null;
-
+  const cleanedContent = cleanArticleContent(content);
   if (!description && !cleanedContent) {
     return null;
   }
 
   return (
     <>
-      {description ? (
-        <Text style={styles.description}>{description}</Text>
-      ) : null}
+      {description && <Text style={styles.description}>{description}</Text>}
 
-      {cleanedContent ? (
+      {cleanedContent && (
         <Text style={styles.contentText}>{cleanedContent}</Text>
-      ) : null}
+      )}
     </>
   );
 };
