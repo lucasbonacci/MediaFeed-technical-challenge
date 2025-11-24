@@ -41,6 +41,7 @@ const BottomTabs: React.FC = () => {
         component={FavoritesScreen}
         options={{
           tabBarIcon: createTabIcon(StarIcon, { isFilled: false }),
+          lazy: true,
         }}
       />
     </Tab.Navigator>
