@@ -2,16 +2,16 @@ import React, { memo } from 'react';
 import {
   View,
   Text,
-  Image,
   StyleSheet,
   TouchableOpacity,
   NativeSyntheticEvent,
   NativeTouchEvent,
 } from 'react-native';
-import { NewsArticle } from '@/types/news';
+import FastImage from '@d11/react-native-fast-image';
 import { NavigationService } from '@/navigation/NavigationService';
-import { Routes } from '@/navigation/paths';
 import { useFavorites } from '@/context/FavoritesContext';
+import { NewsArticle } from '@/types/news';
+import { Routes } from '@/navigation/paths';
 import { StarIcon } from '@/assets/svg';
 import { colors, fonts } from '@/theme';
 import { formatDate } from '@/utils';
@@ -41,11 +41,15 @@ const NewsItem: React.FC<NewsItemProps> = memo(
         onPress={handlePress}
       >
         {article.urlToImage ? (
-          <Image
-            source={{ uri: article.urlToImage }}
-            style={styles.image}
-            resizeMode="cover"
-          />
+            <FastImage
+              source={{
+                uri: article.urlToImage,
+                priority: FastImage.priority.high,
+                cache: FastImage.cacheControl.immutable,
+              }}
+              style={styles.image}
+              resizeMode={FastImage.resizeMode.cover}
+            />
         ) : (
           <View style={[styles.image, styles.placeholderImage]} />
         )}

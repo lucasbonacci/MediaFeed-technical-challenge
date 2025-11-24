@@ -1,5 +1,6 @@
 import React from 'react';
-import { Image, StyleSheet } from 'react-native';
+import { StyleSheet } from 'react-native';
+import FastImage from '@d11/react-native-fast-image';
 import { colors } from '@/theme';
 
 type Props = {
@@ -10,7 +11,15 @@ const ArticleImage: React.FC<Props> = ({ imageUrl }) => {
   if (!imageUrl) return null;
 
   return (
-    <Image source={{ uri: imageUrl }} style={styles.image} resizeMode="cover" />
+    <FastImage
+      source={{
+        uri: imageUrl,
+        priority: FastImage.priority.normal,
+        cache: FastImage.cacheControl.immutable,
+      }}
+      style={styles.image}
+      resizeMode={FastImage.resizeMode.cover}
+    />
   );
 };
 

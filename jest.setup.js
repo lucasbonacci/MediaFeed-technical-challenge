@@ -18,7 +18,7 @@ jest.mock('@react-navigation/native', () => ({
     navigate: jest.fn(),
     goBack: jest.fn(),
   }),
-  NavigationContainer: ({ children }: any) => children,
+  NavigationContainer: ({ children }) => children,
   useFocusEffect: jest.fn(),
   useRoute: () => ({ params: {} }),
 }));
@@ -30,6 +30,37 @@ jest.mock('react-native-gesture-handler', () => {
   return {
     GestureHandlerRootView: View,
   };
+});
+
+// Mock @d11/react-native-fast-image
+jest.mock('@d11/react-native-fast-image', () => {
+  const React = require('react');
+  const { View } = require('react-native');
+
+  const MockFastImage = React.forwardRef((props, ref) => {
+    return <View ref={ref} {...props} />;
+  });
+
+  MockFastImage.resizeMode = {
+    contain: 'contain',
+    cover: 'cover',
+    stretch: 'stretch',
+    center: 'center',
+  };
+
+  MockFastImage.priority = {
+    low: 'low',
+    normal: 'normal',
+    high: 'high',
+  };
+
+  MockFastImage.cacheControl = {
+    immutable: 'immutable',
+    web: 'web',
+    cacheOnly: 'cacheOnly',
+  };
+
+  return MockFastImage;
 });
 
 // Global fetch mock
