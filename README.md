@@ -2,12 +2,6 @@
 
 Aplicación React Native para visualizar y gestionar un feed de noticias con videos.
 
-## 🎥 Demo de la App
-
-Haz clic en la imagen para ver el video completo.
-
-[![Demo Preview](./src/assets/demo/demo.png)](./src/assets/demo/demo.mp4)
-
 ## 📋 Requisitos Previos
 
 Antes de comenzar, asegúrate de tener instalado:
