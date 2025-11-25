@@ -1,5 +1,5 @@
 import React, { useCallback, useMemo, useState } from 'react';
-import { View, FlatList, RefreshControl, StyleSheet } from 'react-native';
+import { View, FlatList, RefreshControl, StyleSheet, Platform } from 'react-native';
 import { useTranslation } from 'react-i18next';
 import NewsItem from '@/components/NewsItem';
 import { NewsArticle } from '@/types/news';
@@ -77,6 +77,7 @@ export const FeedScreen: React.FC = () => {
           maxToRenderPerBatch={10}
           windowSize={7}
           removeClippedSubviews
+          decelerationRate={Platform.OS === 'android' ? 0.9 : 1}
         />
       )}
     </View>
