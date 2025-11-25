@@ -2,6 +2,12 @@
 
 Aplicación React Native para visualizar y gestionar un feed de noticias con videos.
 
+## 🎥 Demo de la App
+
+Haz clic en la imagen para ver el video completo.
+
+[![Demo Preview](./src/assets/demo/demo.png)](./src/assets/demo/demo.mp4)
+
 ## 📋 Requisitos Previos
 
 Antes de comenzar, asegúrate de tener instalado:
@@ -13,13 +19,23 @@ Antes de comenzar, asegúrate de tener instalado:
 
 ## 🚀 Cómo Correr el Proyecto
 
-### 1. Instalar Dependencias
+### 1. En la raíz del proyecto, crea un archivo `.env` con las siguientes variables:
+
+> **Nota:** Si descargaste el proyecto desde el archivo comprimido enviado, el archivo `.env` ya está incluido en la carpeta.  
+> Si estás clonando el repositorio desde cero, entonces debes crearlo manualmente.
+
+```env
+NEWS_API_BASE_URL=https://newsapi.org/v2
+NEWS_API_KEY=TU_API_KEY_DE_NEWSAPI
+```
+
+### 2. Instalar Dependencias
 
 ```bash
 npm install
 ```
 
-### 2. Configuración para iOS
+### 3. Configuración para iOS
 
 Si vas a correr el proyecto en iOS, necesitas instalar las dependencias de CocoaPods:
 
@@ -29,7 +45,7 @@ pod install
 cd ..
 ```
 
-### 3. Iniciar Metro Bundler
+### 4. Iniciar Metro Bundler
 
 En una terminal, ejecuta:
 
@@ -37,7 +53,7 @@ En una terminal, ejecuta:
 npm start
 ```
 
-### 4. Ejecutar la Aplicación
+### 5. Ejecutar la Aplicación
 
 #### Android
 
