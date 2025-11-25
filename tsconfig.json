@@ -2,10 +2,10 @@
   "extends": "@react-native/typescript-config",
   "compilerOptions": {
     "jsx": "react-native",
-    "baseUrl": ".",
     "paths": {
       "@/*": ["./src/*"]
-    }
+    },
+    "strict": true
   },
   "include": ["**/*.ts", "**/*.tsx"],
   "exclude": ["**/node_modules", "**/Pods"]
