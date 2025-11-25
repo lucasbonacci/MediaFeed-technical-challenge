@@ -1,0 +1,15 @@
+export const NEWS_API_ERROR_CODES = [
+  'apiKeyDisabled',
+  'apiKeyExhausted',
+  'apiKeyInvalid',
+  'apiKeyMissing',
+  'parameterInvalid',
+  'parametersMissing',
+  'rateLimited',
+  'sourcesTooMany',
+  'sourceDoesNotExist',
+  'unexpectedError',
+  'networkError',
+  'maximumResultsReached',
+  'unknownError',
+] as const;

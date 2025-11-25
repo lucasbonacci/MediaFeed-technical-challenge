@@ -1,10 +1,15 @@
-import { NewsApiResponse } from '@/types/news';
-import { parseNewsApiResponse, getDeviceLanguage } from '@/utils';
+// src/services/newsApi.ts
+import { NewsApiResponse, NewsApiError } from '@/types/news';
+import {
+  parseNewsApiResponse,
+  getDeviceLanguage,
+  parseNewsApiError,
+} from '@/utils';
 import {
   NEWS_API_KEY,
   DEFAULT_PAGE_SIZE,
   NEWS_API_BASE_URL,
-} from '@/constants/api';
+} from '@/config/api';
 
 export const fetchNews = async ({
   pageParam = 1,
@@ -20,17 +25,26 @@ export const fetchNews = async ({
     query,
   )}&sortBy=popularity&pageSize=${DEFAULT_PAGE_SIZE}&page=${pageParam}&language=${lang}`;
 
-  const res = await fetch(url, {
-    headers: {
-      'X-Api-Key': NEWS_API_KEY,
-    },
-  });
+  let res: Response;
+
+  try {
+    res = await fetch(url, {
+      headers: {
+        'X-Api-Key': NEWS_API_KEY,
+      },
+    });
+  } catch {
+    const networkError = new Error(
+      'Network error while fetching news',
+    ) as NewsApiError;
+    networkError.code = 'networkError';
+    throw networkError;
+  }
 
   const body = await res.json().catch(() => null);
 
   if (!res.ok) {
-    const message = (body as any)?.message || 'Error fetching news';
-    throw new Error(message);
+    throw parseNewsApiError(res, body);
   }
 
   return parseNewsApiResponse(body);

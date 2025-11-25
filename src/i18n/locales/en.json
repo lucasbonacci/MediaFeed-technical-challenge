@@ -20,5 +20,22 @@
     "feed": "Feed",
     "favorites": "Favorites",
     "article": "Article Details"
+  },
+  "errors": {
+    "newsApi": {
+      "apiKeyMissing": "The API key is missing from the request.",
+      "apiKeyInvalid": "The API key is not valid.",
+      "apiKeyDisabled": "Your API key is disabled.",
+      "apiKeyExhausted": "You have reached the request limit for your plan.",
+      "parameterInvalid": "One of the search parameters is not valid.",
+      "parametersMissing": "Required search parameters are missing.",
+      "rateLimited": "You have made too many requests recently. Developer accounts are limited to 100 requests over a 24 hour period (50 requests available every 12 hours).",
+      "sourcesTooMany": "You are querying too many sources in a single request.",
+      "sourceDoesNotExist": "The selected source does not exist.",
+      "unexpectedError": "An unexpected error occurred on the news server.",
+      "networkError": "Unable to connect to the server. Please check your connection.",
+      "unknownError": "An error occurred while loading the news.",
+      "maximumResultsReached": "You have requested too many results. Developer accounts are limited to a max of 100 results."
+    }
   }
 }

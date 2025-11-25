@@ -5,4 +5,5 @@ export { default as parseNewsApiResponse } from './parseNewsApiResponse';
 export { default as openUrl } from './openUrl';
 export { default as cleanArticleContent } from './cleanArticleContent';
 export { default as getDeviceLanguage } from './getDeviceLanguage';
-
+export { default as parseNewsApiError } from './parseNewsApiError';
+export { default as getNewsErrorMessage } from './translateNewsError';

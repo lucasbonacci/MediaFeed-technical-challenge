@@ -20,5 +20,22 @@
     "feed": "Noticias",
     "favorites": "Favoritos",
     "article": "Detalle del artículo"
+  },
+  "errors": {
+    "newsApi": {
+      "apiKeyMissing": "Falta la clave de API en la solicitud.",
+      "apiKeyInvalid": "La clave de API no es válida.",
+      "apiKeyDisabled": "Tu clave de API está deshabilitada.",
+      "apiKeyExhausted": "Has alcanzado el límite de solicitudes de tu plan.",
+      "parameterInvalid": "Uno de los parámetros de búsqueda no es válido.",
+      "parametersMissing": "Faltan parámetros de búsqueda obligatorios.",
+      "rateLimited": "Has realizado demasiadas solicitudes recientemente. Las cuentas de desarrollador tienen un límite de 100 solicitudes en un período de 24 horas (50 solicitudes disponibles cada 12 horas).",
+      "sourcesTooMany": "Estás consultando demasiadas fuentes en una sola solicitud.",
+      "sourceDoesNotExist": "La fuente seleccionada no existe.",
+      "unexpectedError": "Ocurrió un error inesperado en el servidor de noticias.",
+      "networkError": "No se pudo conectar con el servidor. Revisa tu conexión.",
+      "unknownError": "Ocurrió un error al cargar las noticias.",
+      "maximumResultsReached": "Has solicitado demasiados resultados. Las cuentas de desarrollador están limitadas a un máximo de 100 resultados."
+    }
   }
 }

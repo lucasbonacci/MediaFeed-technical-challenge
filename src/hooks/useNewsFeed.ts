@@ -4,6 +4,7 @@ import useDebounce from '@/hooks/useDebounce';
 import { useInfiniteQuery } from '@tanstack/react-query';
 import { useTranslation } from 'react-i18next';
 import { fetchNews } from '@/services/newsApi';
+import { getNewsErrorMessage } from '@/utils';
 
 const useNewsFeed = (search: string) => {
   const { t } = useTranslation();
@@ -39,17 +40,20 @@ const useNewsFeed = (search: string) => {
     if (!query.isFetchingNextPage && query.hasNextPage && !query.isError) {
       query.fetchNextPage();
     }
-  }, [
-    query
-  ]);
+  }, [query]);
+
+  const errorMessage = useMemo(
+    () => (query.error ? getNewsErrorMessage(query.error, t) : ''),
+    [query.error, t],
+  );
 
   return {
     ...query,
     flatData,
     hasNoData,
     handleLoadMore,
-    errorMessage: query.error?.message ?? t('feed.unexpectedError'),
+    errorMessage,
   };
 };
 
-export default useNewsFeed
+export default useNewsFeed;

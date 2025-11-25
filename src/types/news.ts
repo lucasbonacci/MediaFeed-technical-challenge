@@ -1,3 +1,5 @@
+import { NEWS_API_ERROR_CODES } from '@/constants/newsApiErrors';
+
 export interface NewsArticle {
   source: {
     id: string | null;
@@ -21,3 +23,9 @@ export interface NewsApiResponse {
   message?: string;
 }
 
+export type NewsApiErrorCode = (typeof NEWS_API_ERROR_CODES)[number];
+
+export interface NewsApiError extends Error {
+  code?: NewsApiErrorCode | string;
+  status?: number;
+}
