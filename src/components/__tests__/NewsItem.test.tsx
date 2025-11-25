@@ -69,14 +69,14 @@ describe('NewsItem', () => {
       const article = createMockArticle({ description: null });
       const { getByText } = renderWithProvider(article);
 
-      expect(getByText('No description available')).toBeTruthy();
+      expect(getByText('article.noDescription')).toBeTruthy();
     });
 
     it('renders "No description available" when description is empty', () => {
       const article = createMockArticle({ description: '' });
       const { getByText } = renderWithProvider(article);
 
-      expect(getByText('No description available')).toBeTruthy();
+      expect(getByText('article.noDescription')).toBeTruthy();
     });
   });
 

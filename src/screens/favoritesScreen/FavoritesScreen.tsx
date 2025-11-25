@@ -1,5 +1,6 @@
 import React, { useCallback } from 'react';
 import { View, FlatList, StyleSheet } from 'react-native';
+import { useTranslation } from 'react-i18next';
 import { useFavorites } from '@/context/FavoritesContext';
 import { NewsItem, EmptyList } from '@/components';
 import { NewsArticle } from '@/types/news';
@@ -7,6 +8,7 @@ import { colors } from '@/theme';
 import { keyExtractor } from '@/utils';
 
 const FavoritesScreen: React.FC = () => {
+  const { t } = useTranslation();
   const { favorites } = useFavorites();
 
   const renderItem = useCallback(
@@ -22,8 +24,7 @@ const FavoritesScreen: React.FC = () => {
         renderItem={renderItem}
         ListEmptyComponent={
           <EmptyList
-            text={` No tienes favoritos aún.\n
-        Toca la estrella en cualquier noticia para agregarla a favoritos.`}
+            text={t('favorites.empty')}
           />
         }
         contentContainerStyle={

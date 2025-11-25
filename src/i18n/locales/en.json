@@ -1,0 +1,24 @@
+{
+  "feed": {
+    "title": "Feed",
+    "noResults": "No results found for your search.",
+    "noData": "No data available.",
+    "loadMoreError": "An error occurred while loading more results.",
+    "unexpectedError": "An unexpected error occurred.",
+    "retry": "Tap to retry",
+    "search": "Search news"
+  },
+  "favorites": {
+    "empty": "You don't have any favorites yet.\n\nTap the star on any news article to add it to favorites."
+  },
+  "article": {
+    "noDescription": "No description available",
+    "readMore": "Read full article",
+    "author": "By: {{author}}"
+  },
+  "navigation": {
+    "feed": "Feed",
+    "favorites": "Favorites",
+    "article": "Article Details"
+  }
+}

@@ -2,9 +2,11 @@ import { useMemo, useCallback } from 'react';
 import { NewsApiResponse } from '@/types/news';
 import useDebounce from '@/hooks/useDebounce';
 import { useInfiniteQuery } from '@tanstack/react-query';
+import { useTranslation } from 'react-i18next';
 import { fetchNews } from '@/services/newsApi';
 
 const useNewsFeed = (search: string) => {
+  const { t } = useTranslation();
   const debouncedSearchValue = useDebounce(search, 500);
 
   const query = useInfiniteQuery<NewsApiResponse, Error>({
@@ -46,7 +48,7 @@ const useNewsFeed = (search: string) => {
     flatData,
     hasNoData,
     handleLoadMore,
-    errorMessage: query.error?.message ?? 'Ocurrió un error inesperado.',
+    errorMessage: query.error?.message ?? t('feed.unexpectedError'),
   };
 };
 

@@ -1,5 +1,6 @@
 import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { useTranslation } from 'react-i18next';
 import { FavoritesScreen, FeedScreen } from '@/screens/index';
 import { ListIcon, StarIcon } from '@/assets/svg';
 import { Routes } from './paths';
@@ -21,6 +22,7 @@ const createTabIcon =
     );
 
 const BottomTabs: React.FC = () => {
+  const { t } = useTranslation();
   return (
     <Tab.Navigator
       screenOptions={{
@@ -34,6 +36,7 @@ const BottomTabs: React.FC = () => {
         component={FeedScreen}
         options={{
           tabBarIcon: createTabIcon(ListIcon),
+          title: t('navigation.feed'),
         }}
       />
       <Tab.Screen
@@ -42,6 +45,7 @@ const BottomTabs: React.FC = () => {
         options={{
           tabBarIcon: createTabIcon(StarIcon, { isFilled: false }),
           lazy: true,
+          title: t('navigation.favorites'),
         }}
       />
     </Tab.Navigator>

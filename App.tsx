@@ -5,6 +5,7 @@
  * @format
  */
 import 'react-native-gesture-handler';
+import '@/i18n';
 import React from 'react';
 import { StatusBar, useColorScheme, StyleSheet } from 'react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';

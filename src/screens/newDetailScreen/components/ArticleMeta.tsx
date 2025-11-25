@@ -1,5 +1,6 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
+import { useTranslation } from 'react-i18next';
 import { colors, fonts } from '@/theme';
 import { formatDate } from '@/utils';
 
@@ -10,13 +11,14 @@ type Props = {
 };
 
 const ArticleMeta: React.FC<Props> = ({ sourceName, publishedAt, author }) => {
+  const { t } = useTranslation();
   return (
     <>
       <View style={styles.metaContainer}>
         <Text style={styles.source}>{sourceName}</Text>
         <Text style={styles.date}>{formatDate.full(publishedAt)}</Text>
       </View>
-      {author && <Text style={styles.author}>Por: {author}</Text>}
+      {author && <Text style={styles.author}>{t('article.author', { author })}</Text>}
     </>
   );
 };

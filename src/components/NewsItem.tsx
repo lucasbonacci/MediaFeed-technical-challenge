@@ -5,6 +5,7 @@ import {
   StyleSheet,
   TouchableOpacity,
 } from 'react-native';
+import { useTranslation } from 'react-i18next';
 import FastImage from '@d11/react-native-fast-image';
 import { useArticleFavorite } from '@/hooks/useArticleFavorite';
 import { NewsArticle } from '@/types/news';
@@ -18,6 +19,7 @@ interface NewsItemProps {
 
 const NewsItem: React.FC<NewsItemProps> = memo(
   ({ article }) => {
+    const { t } = useTranslation(); 
     const { favorite, handleFavoritePress, handleOpenArticle } =
       useArticleFavorite(article);
 
@@ -63,7 +65,7 @@ const NewsItem: React.FC<NewsItemProps> = memo(
             </TouchableOpacity>
           </View>
           <Text style={styles.description} numberOfLines={2}>
-            {article.description || 'No description available'}
+            {article.description || t('article.noDescription')}
           </Text>
           <View style={styles.footer}>
             <Text style={styles.source}>{article.source.name}</Text>

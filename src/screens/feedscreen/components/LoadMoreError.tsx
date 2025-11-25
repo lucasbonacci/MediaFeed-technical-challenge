@@ -1,5 +1,6 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
+import { useTranslation } from 'react-i18next';
 import { colors, fonts } from '@/theme';
 
 type Props = {
@@ -7,10 +8,11 @@ type Props = {
 };
 
 const LoadMoreError: React.FC<Props> = ({ message }) => {
+  const { t } = useTranslation();
   return (
     <View style={styles.container}>
       <Text style={styles.text}>
-        {message || 'Ocurrió un error al cargar más resultados.'}
+        {message || t('feed.loadMoreError')}
       </Text>
     </View>
   );

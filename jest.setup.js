@@ -63,5 +63,43 @@ jest.mock('@d11/react-native-fast-image', () => {
   return MockFastImage;
 });
 
+// Mock react-native-localize
+jest.mock('react-native-localize', () => ({
+  getLocales: () => [
+    {
+      countryCode: 'US',
+      languageTag: 'en-US',
+      languageCode: 'en',
+      isRTL: false,
+    },
+  ],
+  getCountry: () => 'US',
+  getNumberFormatSettings: () => ({
+    decimalSeparator: '.',
+    groupingSeparator: ',',
+  }),
+  getCalendar: () => 'gregorian',
+  getTemperatureUnit: () => 'celsius',
+  getTimeZone: () => 'America/New_York',
+  uses24HourClock: () => false,
+  usesMetricSystem: () => true,
+}));
+
+// Mock react-i18next
+jest.mock('react-i18next', () => ({
+  useTranslation: () => {
+    return {
+      t: key => key, // devuelve la key directamente
+      i18n: {
+        changeLanguage: () => Promise.resolve(),
+      },
+    };
+  },
+  initReactI18next: {
+    type: '3rdParty',
+    init: () => {},
+  },
+}));
+
 // Global fetch mock
 global.fetch = jest.fn();

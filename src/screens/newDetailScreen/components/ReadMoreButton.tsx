@@ -1,5 +1,6 @@
 import React from 'react';
 import { TouchableOpacity, Text, StyleSheet } from 'react-native';
+import { useTranslation } from 'react-i18next';
 import { colors, fonts } from '@/theme';
 
 type Props = {
@@ -7,13 +8,14 @@ type Props = {
 };
 
 const ReadMoreButton: React.FC<Props> = ({ onPress }) => {
+  const { t } = useTranslation();
   return (
     <TouchableOpacity
       onPress={onPress}
       style={styles.urlButton}
       activeOpacity={0.7}
     >
-      <Text style={styles.urlButtonText}>Leer artículo completo</Text>
+      <Text style={styles.urlButtonText}>{t('article.readMore')}</Text>
     </TouchableOpacity>
   );
 };

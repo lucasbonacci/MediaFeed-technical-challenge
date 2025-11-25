@@ -1,5 +1,6 @@
 import React from 'react';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
+import { useTranslation } from 'react-i18next';
 import { colors, fonts } from '@/theme';
 
 type ErrorStateProps = {
@@ -8,11 +9,12 @@ type ErrorStateProps = {
 };
 
 const ErrorState: React.FC<ErrorStateProps> = ({ message, onRetry }) => {
+  const { t } = useTranslation();
   return (
     <View style={styles.center}>
       <Text style={styles.errorText}>{message}</Text>
       <TouchableOpacity onPress={onRetry}>
-        <Text style={styles.retry}>Tap to retry</Text>
+        <Text style={styles.retry}>{t('feed.retry')}</Text>
       </TouchableOpacity>
     </View>
   );

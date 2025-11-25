@@ -1,5 +1,6 @@
 import React from 'react';
 import { TextInput, StyleSheet, View } from 'react-native';
+import { useTranslation } from 'react-i18next';
 import { SearchIcon } from '@/assets/svg';
 import { colors, fonts } from '@/theme';
 
@@ -9,6 +10,7 @@ interface SearchInputProps {
 }
 
 const SearchInput: React.FC<SearchInputProps> = ({ value, onChangeText }) => {
+  const { t } = useTranslation();
   return (
     <View style={styles.container}>
       <View style={styles.iconContainer}>
@@ -19,7 +21,7 @@ const SearchInput: React.FC<SearchInputProps> = ({ value, onChangeText }) => {
         style={styles.input}
         onChangeText={onChangeText}
         value={value}
-        placeholder="Buscar noticias"
+        placeholder={t('feed.search')}
         placeholderTextColor={colors.searchIcon}
       />
     </View>

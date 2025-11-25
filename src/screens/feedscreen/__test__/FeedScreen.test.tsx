@@ -136,7 +136,7 @@ describe('FeedScreen - branch coverage', () => {
     const { getByText, getByTestId } = renderWithProviders(<FeedScreen />);
 
     // Initial branch: searchValue === '' → default empty text
-    expect(getByText('No hay datos disponibles.')).toBeTruthy();
+    expect(getByText('feed.noData')).toBeTruthy();
 
     // Now simulate typing in SearchInput
     const input = getByTestId('search-input');
@@ -145,9 +145,7 @@ describe('FeedScreen - branch coverage', () => {
 
     // After updating searchValue, EmptyList should show the "no results" message
     await waitFor(() => {
-      expect(
-        getByText('No se encontraron resultados para tu búsqueda.'),
-      ).toBeTruthy();
+      expect(getByText('feed.noResults')).toBeTruthy();
     });
   });
 

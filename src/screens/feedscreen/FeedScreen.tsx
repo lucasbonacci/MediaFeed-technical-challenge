@@ -1,5 +1,6 @@
 import React, { useCallback, useMemo, useState } from 'react';
 import { View, FlatList, RefreshControl, StyleSheet } from 'react-native';
+import { useTranslation } from 'react-i18next';
 import NewsItem from '@/components/NewsItem';
 import { NewsArticle } from '@/types/news';
 import useNewsFeed from '@/hooks/useNewsFeed';
@@ -9,6 +10,7 @@ import { colors } from '@/theme';
 import { keyExtractor } from '@/utils';
 
 export const FeedScreen: React.FC = () => {
+  const { t } = useTranslation();
   const [searchValue, setSearchValue] = useState('');
 
   const {
@@ -40,8 +42,8 @@ export const FeedScreen: React.FC = () => {
   }, [isFetchingNextPage, isError, errorMessage]);
 
   const emptyListText = isSearching
-    ? 'No se encontraron resultados para tu búsqueda.'
-    : 'No hay datos disponibles.';
+    ? t('feed.noResults')
+    : t('feed.noData');
 
   const showList = !isError || !hasNoData;
 

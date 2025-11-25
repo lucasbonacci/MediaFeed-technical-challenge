@@ -1,0 +1,24 @@
+{
+  "feed": {
+    "title": "Feed",
+    "noResults": "No se encontraron resultados para tu búsqueda.",
+    "noData": "No hay datos disponibles.",
+    "loadMoreError": "Ocurrió un error al cargar más resultados.",
+    "unexpectedError": "Ocurrió un error inesperado.",
+    "retry": "Toca para reintentar",
+    "search": "Buscar noticias"
+  },
+  "favorites": {
+    "empty": "No tienes favoritos aún.\n\nToca la estrella en cualquier noticia para agregarla a favoritos."
+  },
+  "article": {
+    "noDescription": "No hay descripción disponible",
+    "readMore": "Leer artículo completo",
+    "author": "Por: {{author}}"
+  },
+  "navigation": {
+    "feed": "Noticias",
+    "favorites": "Favoritos",
+    "article": "Detalle del artículo"
+  }
+}

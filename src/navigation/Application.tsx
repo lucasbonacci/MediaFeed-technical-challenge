@@ -2,6 +2,7 @@ import React from 'react';
 import { TouchableOpacity, StyleSheet } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
+import { useTranslation } from 'react-i18next';
 import { NavigationService } from '@/navigation/NavigationService';
 import { navigationRef } from './NavigationService';
 import { NewDetailScreen } from '@/screens/index';
@@ -22,6 +23,7 @@ const renderHeaderBackButton = () => (
 );
 
 const Application: React.FC = () => {
+  const { t } = useTranslation();
   return (
     <NavigationContainer ref={navigationRef}>
       <Stack.Navigator screenOptions={{ gestureEnabled: true }}>
@@ -34,7 +36,7 @@ const Application: React.FC = () => {
           name={Routes.NewDetailScreen}
           component={NewDetailScreen}
           options={({ route }) => ({
-            title: route.params?.article.title ?? Routes.NewDetailScreen,
+            title: route.params?.article.title ?? t('navigation.article'),
             headerLeft: renderHeaderBackButton,
           })}
         />
