@@ -4,6 +4,7 @@ import React, {
   useState,
   useEffect,
   useCallback,
+  useMemo,
   ReactNode,
 } from 'react';
 
@@ -85,13 +86,16 @@ export const FavoritesProvider: React.FC<FavoritesProviderProps> = ({
     [isFavorite, addFavorite, removeFavorite],
   );
 
-  const value: FavoritesContextType = {
-    favorites,
-    addFavorite,
-    removeFavorite,
-    isFavorite,
-    toggleFavorite,
-  };
+  const value = useMemo<FavoritesContextType>(
+    () => ({
+      favorites,
+      addFavorite,
+      removeFavorite,
+      isFavorite,
+      toggleFavorite,
+    }),
+    [favorites, addFavorite, removeFavorite, isFavorite, toggleFavorite],
+  );
 
   return (
     <FavoritesContext.Provider value={value}>
